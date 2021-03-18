@@ -7,14 +7,6 @@ jobs:
     name: Build my project
     runs-on: ubuntu-latest
     steps:
-      # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v2.0-alpha-6
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          targetPlatform: StandaloneWindows64
-          
       # Checkout
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -34,6 +26,14 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v2.0-alpha-6
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          targetPlatform: StandaloneWindows64
 
       # Output
       - uses: actions/upload-artifact@v2.2.2
