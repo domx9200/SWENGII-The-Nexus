@@ -11,5 +11,5 @@ jobs:
     - name: artifact
       uses: actions/upload-artifact@v2
       with:
-        name: ${{steps.getManualFile.outputs.filePath}}
+        name: ${{steps.getManualLicenseFile.outputs.filePath}}
         path: ${{steps.getManualLicenseFile.outputs.filePath}}
