@@ -16,8 +16,8 @@ jobs:
       # Cache
       - uses: actions/cache@v2
         with:
-          path: the Nexus/Library
-          key: the Nexus/Library
+          path: Library
+          key: Library
 
       # Test
       - name: Run tests
