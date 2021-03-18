@@ -14,14 +14,14 @@ jobs:
           lfs: true
 
       # Cache
-      - uses: actions/cache@v2
+      - uses: actions/cache@v2.1.4
         with:
           path: Library
           key: Library
 
       # Test
       - name: Run tests
-        uses: game-ci/unity-test-runner@v2
+        uses: game-ci/unity-test-runner@v2.0-alpha-3
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
@@ -29,14 +29,14 @@ jobs:
 
       # Build
       - name: Build project
-        uses: game-ci/unity-builder@v2
+        uses: game-ci/unity-builder@v2.0-alpha-6
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           targetPlatform: WebGL
 
       # Output
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2.2.2
         with:
           name: Build
           path: Build
