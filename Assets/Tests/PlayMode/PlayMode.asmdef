@@ -1,13 +1,14 @@
 {
-    "name": "tests",
+    "name": "PlayModer",
     "references": [
         "UnityEngine.TestRunner",
-        "UnityEditor.TestRunner"
+        "UnityEditor.TestRunner",
+        "CombatMenuScripts",
+        "creatureCreationScripts",
+        "MainMenuScripts"
     ],
     "includePlatforms": [],
-    "excludePlatforms": [
-        "WindowsStandalone64"
-    ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [

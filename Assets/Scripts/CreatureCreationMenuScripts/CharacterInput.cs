@@ -12,6 +12,7 @@ public class CharacterInput : MonoBehaviour {
                   _intelligence = new int[3], _wisdom = new int[3], _charisma = new int[3], _passives = new int[3];
 
     //I know that this function is a bit on the beefy side, but it's still better than keeping 20+ seperate functions.
+    //as it turns out, all inputFields can actually just default to taking ints
     public void inputValue(string input) {
         int temp;
         //start with seeing if it's the name because it doesn't need to be converted to an int
