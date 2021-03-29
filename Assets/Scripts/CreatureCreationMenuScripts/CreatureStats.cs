@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Creature
+public class CreatureStats : MonoBehaviour
 {
     //start by defining all the private variables that our creature is goiong to have
     public string _Name;
@@ -13,7 +13,7 @@ public class Creature
     //constructor class for what will become the new creature, abilityStuff is a two dimensional array that
     //holds all ability info, this is so that we have less inputs. since there are six abilities, it should
     //always be [6][3] in size.
-    public Creature(string name, int hp, int ac, int initiative, int[,] abilityStuff, int[] passives) 
+    public void SetValues(string name, int hp, int ac, int initiative, int[,] abilityStuff, int[] passives) 
     {
         _Name = name;
         _HP = hp;
@@ -24,8 +24,8 @@ public class Creature
             _Strength[i] = abilityStuff[0, i];
             _Dexterity[i] = abilityStuff[1, i];
             _Constitution[i] = abilityStuff[2, i];
-            _Intelligence[i] = abilityStuff[3, i];
-            _Wisdom[i] = abilityStuff[4, i];
+            _Wisdom[i] = abilityStuff[3, i];
+            _Intelligence[i] = abilityStuff[4, i];
             _Charisma[i] = abilityStuff[5, i];
         }
         _Passives = passives;

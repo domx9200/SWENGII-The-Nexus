@@ -614,7 +614,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 458491442}
-        m_MethodName: OnStartClick
+        m_MethodName: SceneChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -670,9 +670,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 458491437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae463601552123549b030afb506725df, type: 3}
+  m_Script: {fileID: 11500000, guid: fe7574108f477e445bbc6504554172b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentScene: MainMenu
+  NewScene: CombatMenu
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +685,6 @@ GameObject:
   m_Component:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
-  - component: {fileID: 519420029}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -691,14 +692,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &519420029
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -973,7 +966,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1844252944}
-        m_MethodName: OnCreateClick
+        m_MethodName: SceneChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1029,9 +1022,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1844252939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae463601552123549b030afb506725df, type: 3}
+  m_Script: {fileID: 11500000, guid: fe7574108f477e445bbc6504554172b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentScene: MainMenu
+  NewScene: CreatureCreationMenu
 --- !u!1 &1870675536
 GameObject:
   m_ObjectHideFlags: 0
