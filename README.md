@@ -11,7 +11,7 @@ This is a Dungeons and Dragons combat initiative tracker for 5th edition. Create
 
 # Building Instructions
 Building and running this project is no different than running any other Unity project. 
-1. File
+1. With Unity open, click "File"
 2. Click "Build Setting" if you desire to build on a specific platform or edit the compression method, otherwise click "Build and Run"
 3. Choose a location to save the build
 4. Once it has built, open the executable or however you run programs in the built system
