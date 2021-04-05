@@ -15,22 +15,22 @@ public class FinishCreation : MonoBehaviour
 
     public void OnCreatureFinish()
 	{
-		InputField[] test = FindObjectsOfType<InputField>();
+		InputField[] InputFields = FindObjectsOfType<InputField>();
         bool IsntComplete = false;
 		if (SceneManager.GetSceneByName("CreatureDump").name == null)
 			creatureDump = SceneManager.CreateScene("CreatureDump");
 		else
 			creatureDump = SceneManager.GetSceneByName("CreatureDump");
-		for(int i = 0; i < test.Length; i++)
+		for(int i = 0; i < InputFields.Length; i++)
         {
-            if(test[i].text == "")
+            if(InputFields[i].text == "")
             {
                 //do error checking
                 IsntComplete = true;
             } 
             else
             {
-                InputValue(test[i]);
+                InputValue(InputFields[i]);
             }
         }
         if (!IsntComplete)
@@ -40,6 +40,8 @@ public class FinishCreation : MonoBehaviour
             var toMove = Instantiate(newCreature);
             var stats = toMove.GetComponent<CreatureStats>();
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
+            JsonHandler myJsonHandler = new JsonHandler(toMove);
+            myJsonHandler.Save();
             SceneManager.MoveGameObjectToScene(toMove, creatureDump);
         }
 	}
