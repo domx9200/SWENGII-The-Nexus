@@ -35,7 +35,7 @@ public class JsonHandler
         }
 
         var stats = newCreature.GetComponent<CreatureStats>();
-        string json = JsonUtility.ToJson(stats);
+        string json = JsonUtility.ToJson(stats, true);
         
         SaveSystem.Save(json);
     }
