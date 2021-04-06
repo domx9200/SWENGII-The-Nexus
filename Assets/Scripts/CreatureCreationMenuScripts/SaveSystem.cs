@@ -29,22 +29,48 @@ public static class SaveSystem
     // Save to a given file 
     public static void Save(string saveString)
     {
-        // Simple write to file on our save file
-        File.WriteAllText(SAVE_FOLDER + "save.json", saveString);
+        int saveNumber = 1;
+        // Save without overwriting
+        while (File.Exists("save_" + saveNumber + ".json"))
+        {
+            saveNumber++;            
+        }
+        File.WriteAllText(SAVE_FOLDER + "save_" + saveNumber + ".json", saveString);
     }
 
     // Get data from a JSON file, then return it as a string
     public static string Load()
     {
-        // Check that the desired file exists
-        if (File.Exists(SAVE_FOLDER + "save.json"))
+        DirectoryInfo directoryInfo = new DirectoryInfo(SAVE_FOLDER);   // New DirectoryInfo object on our save folder's path
+        FileInfo[] saveFiles = directoryInfo.GetFiles("*.json");    // Array of save files in the save folder
+        FileInfo mostRecentFile = null;     // Initialize info on our most recent file as null before checking file info
+
+        // Update our most recent file according to last write time
+        foreach (FileInfo fileInfo in saveFiles)
+        {
+            if (mostRecentFile == null)
+            {
+                mostRecentFile = fileInfo;
+            }
+            else
+            {
+                if (fileInfo.LastWriteTime > mostRecentFile.LastWriteTime)
+                {
+                    mostRecentFile = fileInfo;
+                }
+            }
+        }
+
+        // Check that there is a most recent file
+        // Load from most recent file by default
+        if (mostRecentFile != null)
         {
             // Put data into a string so that it can be parsed
-            string saveString = File.ReadAllText(SAVE_FOLDER + "save.json");
+            string saveString = File.ReadAllText(mostRecentFile.FullName);
             return saveString;
         }
-        else
-        {  
+        else 
+        {
             return null;
         }
     }
