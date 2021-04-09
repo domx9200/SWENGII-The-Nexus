@@ -23,7 +23,7 @@ public class DropDownHandler : MonoBehaviour
         {
             _dropDown.SetActive(!_dropDown.activeSelf);
             bool isOpen = _animator.GetBool("open");
-            _animator.SetBool("open", !isOpen);\
+            _animator.SetBool("open", !isOpen);
             StartCoroutine(WaitForOpenAnimation(_animator.GetCurrentAnimatorStateInfo(0).length));
         }
     }
