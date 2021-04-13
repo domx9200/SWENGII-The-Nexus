@@ -1,3 +1,15 @@
-﻿{
-	"name": "CombatMenuScripts"
+{
+    "name": "CombatMenuScripts",
+    "references": [
+        "GUID:bb8e508b52bac2f4387c0fc1853e1f9a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class FinishCreation : MonoBehaviour
 {
@@ -42,6 +43,9 @@ public class FinishCreation : MonoBehaviour
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
             JsonHandler myJsonHandler = new JsonHandler(toMove);
             myJsonHandler.Save();
+
+            var test = toMove.transform.Find("NameAndShowStatsOpen").gameObject;
+            Debug.Log(test.GetComponentInChildren<TextMeshProUGUI>().text);
             SceneManager.MoveGameObjectToScene(toMove, creatureDump);
         }
 	}
