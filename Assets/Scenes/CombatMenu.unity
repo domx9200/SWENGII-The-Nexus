@@ -236,12 +236,12 @@ PrefabInstance:
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_Name
-      value: Creature (3)
+      value: Bill
       objectReference: {fileID: 0}
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2973b6cba76778449ec62fdcb8682b1, type: 3}
@@ -447,12 +447,12 @@ PrefabInstance:
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_Name
-      value: Creature (6)
+      value: Balgruuf
       objectReference: {fileID: 0}
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2973b6cba76778449ec62fdcb8682b1, type: 3}
@@ -577,12 +577,12 @@ PrefabInstance:
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_Name
-      value: Creature (7)
+      value: Intput
       objectReference: {fileID: 0}
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2973b6cba76778449ec62fdcb8682b1, type: 3}
@@ -1810,12 +1810,12 @@ PrefabInstance:
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_Name
-      value: Creature (2)
+      value: Steve
       objectReference: {fileID: 0}
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2973b6cba76778449ec62fdcb8682b1, type: 3}
@@ -2194,12 +2194,12 @@ PrefabInstance:
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_Name
-      value: Creature (4)
+      value: Ted
       objectReference: {fileID: 0}
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2973b6cba76778449ec62fdcb8682b1, type: 3}
@@ -2735,7 +2735,7 @@ PrefabInstance:
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_Name
-      value: Creature
+      value: Bob
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2973b6cba76778449ec62fdcb8682b1, type: 3}
@@ -3465,12 +3465,12 @@ PrefabInstance:
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_Name
-      value: Creature (5)
+      value: Ayaya
       objectReference: {fileID: 0}
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2973b6cba76778449ec62fdcb8682b1, type: 3}
@@ -3595,12 +3595,12 @@ PrefabInstance:
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_Name
-      value: Creature (1)
+      value: Joe
       objectReference: {fileID: 0}
     - target: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2973b6cba76778449ec62fdcb8682b1, type: 3}
