@@ -11,11 +11,12 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public static class SaveSystem
 {
-    public static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";  // Directory for save files
-           
+    public static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";  // Default directory for save files
+       
     public static void Init()
     {
         // Test if save folder exists
@@ -27,51 +28,24 @@ public static class SaveSystem
     }
 
     // Save to a given file 
-    public static void Save(string saveString)
+    public static void Save(string saveString, string path)
     {
-        int saveNumber = 1;
-        // Save without overwriting
-        while (File.Exists("save_" + saveNumber + ".json"))
-        {
-            saveNumber++;            
-        }
-        File.WriteAllText(SAVE_FOLDER + "save_" + saveNumber + ".json", saveString);
+        File.WriteAllText(path, saveString);
+        AssetDatabase.Refresh();
     }
 
     // Get data from a JSON file, then return it as a string
     public static string Load()
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(SAVE_FOLDER);   // New DirectoryInfo object on our save folder's path
-        FileInfo[] saveFiles = directoryInfo.GetFiles("*.json");    // Array of save files in the save folder
-        FileInfo mostRecentFile = null;     // Initialize info on our most recent file as null before checking file info
-
-        // Update our most recent file according to last write time
-        foreach (FileInfo fileInfo in saveFiles)
+        // Open directory with OpenFilePanel 
+        string path = EditorUtility.OpenFilePanel("Load creature from JSON", SAVE_FOLDER, "json");
+        string saveString = File.ReadAllText(path);
+        
+        if (path.Length != 0)
         {
-            if (mostRecentFile == null)
-            {
-                mostRecentFile = fileInfo;
-            }
-            else
-            {
-                if (fileInfo.LastWriteTime > mostRecentFile.LastWriteTime)
-                {
-                    mostRecentFile = fileInfo;
-                }
-            }
-        }
-
-        // Check that there is a most recent file
-        // Load from most recent file by default
-        if (mostRecentFile != null)
-        {
-            // Put data into a string so that it can be parsed
-            string saveString = File.ReadAllText(mostRecentFile.FullName);
             return saveString;
         }
-        else 
-        {
-            return null;
-        }
+
+        return null;
     }
 }
