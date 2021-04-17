@@ -2240,9 +2240,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Initiative: {fileID: 0}
-  RoundCounter: {fileID: 0}
-  TurnIndex: 0
-  RoundCount: 1
 --- !u!1 &1457899789
 GameObject:
   m_ObjectHideFlags: 0

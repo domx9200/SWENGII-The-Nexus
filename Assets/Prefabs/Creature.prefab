@@ -3310,7 +3310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3361931521325844820}
   - component: {fileID: 8039088339837717714}
-  - component: {fileID: 4188339584207344633}
+  - component: {fileID: 6109096529310879510}
   m_Layer: 5
   m_Name: Creature
   m_TagString: Untagged
@@ -3368,7 +3368,7 @@ MonoBehaviour:
   _Wisdom: 000000000000000000000000
   _Charisma: 000000000000000000000000
   _Passives: 000000000000000000000000
---- !u!114 &4188339584207344633
+--- !u!114 &6109096529310879510
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3381,7 +3381,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Initiative: {fileID: 0}
-  InitList: []
 --- !u!1 &4213840802878929696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4111,7 +4110,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4188339584207344633}
+      - m_Target: {fileID: 6109096529310879510}
         m_MethodName: SlideUp
         m_Mode: 1
         m_Arguments:
@@ -5348,7 +5347,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4188339584207344633}
+      - m_Target: {fileID: 6109096529310879510}
         m_MethodName: SlideDown
         m_Mode: 1
         m_Arguments:

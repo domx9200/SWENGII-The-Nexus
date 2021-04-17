@@ -1,41 +1,41 @@
 {
-    "_Name": "1",
-    "_HP": 1,
-    "_AC": 1,
-    "_Initiative": 1,
+    "_Name": "intput",
+    "_HP": 120,
+    "_AC": 21,
+    "_Initiative": 7,
     "_Strength": [
         1,
-        1,
+        0,
         1
     ],
     "_Dexterity": [
         1,
-        1,
+        0,
         1
     ],
     "_Constitution": [
         1,
-        1,
+        0,
         1
     ],
     "_Intelligence": [
         1,
-        1,
+        0,
         1
     ],
     "_Wisdom": [
         1,
-        1,
+        0,
         1
     ],
     "_Charisma": [
         1,
-        1,
+        0,
         1
     ],
     "_Passives": [
-        1,
-        1,
-        1
+        15,
+        17,
+        19
     ]
 }
