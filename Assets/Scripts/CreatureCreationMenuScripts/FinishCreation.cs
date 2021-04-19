@@ -44,8 +44,37 @@ public class FinishCreation : MonoBehaviour
             JsonHandler myJsonHandler = new JsonHandler(toMove);
             myJsonHandler.Save();
 
-            var test = toMove.transform.Find("NameAndShowStatsOpen").gameObject;
-            Debug.Log(test.GetComponentInChildren<TextMeshProUGUI>().text);
+            var nameButton1 = toMove.transform.Find("NameAndShowStatsOpen").gameObject;
+            var nameButton2 = toMove.transform.Find("NameAndShowStatsClose").gameObject;
+
+            var HPText = toMove.transform.Find("Health").GetChild(1).gameObject.GetComponent<TMP_InputField>();
+            var HPPlaceholder = toMove.transform.Find("Health").GetChild(1).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+
+            var ACText = toMove.transform.Find("AC").GetChild(1).gameObject.GetComponent<TMP_InputField>();
+            var ACPlaceholder = toMove.transform.Find("AC").GetChild(1).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+
+            var dropDown = toMove.transform.Find("DropDown").gameObject;
+
+            nameButton1.GetComponentInChildren<TextMeshProUGUI>().text = _creatureName;
+            nameButton2.GetComponentInChildren<TextMeshProUGUI>().text = _creatureName;
+
+            HPText.text = "" + _creatureHealth;
+            HPPlaceholder.text = "" + _creatureHealth;
+
+            ACText.text = "" + _armorClass;
+            ACPlaceholder.text = "" + _armorClass;
+
+            for(int i = 0; i < 6; i++)
+            {
+                dropDown.transform.GetChild(0).GetChild(8 + i).GetComponent<TextMeshProUGUI>().text = "" + abilities[i, 0];
+                dropDown.transform.GetChild(0).GetChild(15 + i).GetComponent<TextMeshProUGUI>().text = "" + abilities[i, 1];
+                dropDown.transform.GetChild(0).GetChild(22 + i).GetComponent<TextMeshProUGUI>().text = "" + abilities[i, 2];
+            }
+
+            for(int i = 0; i < 3; i++)
+            {
+                dropDown.transform.GetChild(1).GetChild(3 + i).GetComponent<TextMeshProUGUI>().text = "" + _passives[i];
+            }
             SceneManager.MoveGameObjectToScene(toMove, creatureDump);
         }
 	}

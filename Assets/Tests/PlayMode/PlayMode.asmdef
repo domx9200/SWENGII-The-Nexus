@@ -5,7 +5,9 @@
         "UnityEditor.TestRunner",
         "CombatMenuScripts",
         "creatureCreationScripts",
-        "MainMenuScripts"
+        "MainMenuScripts",
+        "Unity.TextMeshPro",
+        "Unity.TextMeshPro.Editor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
