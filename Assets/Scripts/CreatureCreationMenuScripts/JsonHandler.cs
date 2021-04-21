@@ -14,7 +14,7 @@ using UnityEditor;
 
 public class JsonHandler 
 {
-    private GameObject newCreature = null; 
+    public GameObject newCreature = null;   
 
     public JsonHandler(GameObject creature)
     {
@@ -28,12 +28,15 @@ public class JsonHandler
     {       
         if (newCreature == null)
         {
-            Debug.Log("Creature object not found. Could not save data.\n");
+            // Make this an error log
+            Debug.Log("Creature object not found. Could not save data.\n"); 
             return;
         }
         var stats = newCreature.GetComponent<CreatureStats>(); // Our CreatureStats 
         string json = JsonUtility.ToJson(stats, true);  // Convert the stats to a JSON string
-        string path = EditorUtility.SaveFilePanel("Save creature as JSON", SaveSystem.SAVE_FOLDER, stats._Name + ".json", "json"); // Save our CreatureStats to an appropriate filename
+        
+        string path = EditorUtility.SaveFilePanel("Save creature as JSON", 
+            SaveSystem.SAVE_FOLDER, stats._Name + ".json", "json"); // Ensure the JSON file extension
 
         SaveSystem.Save(json, path);
     }
@@ -45,7 +48,8 @@ public class JsonHandler
         var stats = newCreature.GetComponent<CreatureStats>(); 
         if (stats == null)
         {
-            Debug.Log("Creature object not found. Could not load data.\n");
+            // Make this an error log
+            Debug.Log("Creature object not found. Could not load data.\n"); 
             return;
         }
 
@@ -56,6 +60,7 @@ public class JsonHandler
         }
         else 
         {
+            // Make this an error log
             Debug.Log("Problems loading the creature file. Use a valid path and file extension.\n");
             return;
         }
