@@ -12,20 +12,12 @@ namespace Tests
 {
     public class JsonHandlerTests
     {
-        // Should fail if test is not written to despite having a save file to read from
-        [UnityTest]
-        public IEnumerator LoadFromFileSucceeds() 
-        {  
-            SaveSystem.Init();
-            yield return null;
-            string test = SaveSystem.Load();
-            Assert.IsTrue(test != null);           
-        }
-
         // Should fail if JsonHandler does not get called during OnCreatureFinish
         [UnityTest]
         public IEnumerator SaveCreatureToJson()
         {
+            DeleteSaveFolderBeforeTest();
+            yield return null;
             SceneManager.LoadScene("CreatureCreationMenu");
             yield return null;
             var inputs = Object.FindObjectsOfType<InputField>();
@@ -37,7 +29,7 @@ namespace Tests
                         inputs[i].text = "intput";
                         break;
                     case "creatureHealth":
-                        inputs[i].text = "69";
+                        inputs[i].text = "120";
                         break;
                     case "armorClass":
                         inputs[i].text = "21";
@@ -102,15 +94,19 @@ namespace Tests
                     case "insight":
                         inputs[i].text = "19";
                         break;
+
                 }
             }
 
             GameObject.Find("completeCreation").GetComponent<FinishCreation>().OnCreatureFinish();
             yield return null;
-            // Load the file we saved to, check that data is the same
-            Assert.IsTrue();
+            Assert.IsTrue(Directory.Exists(Application.dataPath + "/Saves/"));
         }
 
-        // Test similar to above, but on Save button 
+        public void DeleteSaveFolderBeforeTest()
+        {
+            DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Saves/");
+            directoryInfo.Delete(true);
+        }
     }
 }
