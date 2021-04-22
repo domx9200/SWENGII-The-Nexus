@@ -2,21 +2,21 @@
     JsonHandler class definition. Used for conversions of creature stats into 
     JSON-formatted strings and vice-versa. 
     
-    Designed to be called at the end of FinishCreation.OnCreatureFinish()
-    once a creature has been completed. The user will be prompted to save 
-    their creature and this routine will run upon confirmation. 
+    Designed to be called once a creature has been completed or when choosing
+    to save or load a creature.  
 */
 
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
-
-public class JsonHandler
+public class JsonHandler 
 {
-    private GameObject newCreature = null;  
+    public GameObject newCreature = null;   
 
     public JsonHandler(GameObject creature)
     {
@@ -30,33 +30,41 @@ public class JsonHandler
     {       
         if (newCreature == null)
         {
-            Debug.Log("Creature object not found. Could not save data.\n");
+            // Make this an error log
+            Debug.Log("Creature object not found. Could not save data.\n"); 
             return;
         }
-
-        var stats = newCreature.GetComponent<CreatureStats>();
-        string json = JsonUtility.ToJson(stats, true);
+        var stats = newCreature.GetComponent<CreatureStats>(); // Our CreatureStats 
+        string json = JsonUtility.ToJson(stats, true);  // Convert the stats to a JSON string
         
-        SaveSystem.Save(json);
+        string path = EditorUtility.SaveFilePanel("Save creature as JSON", 
+            SaveSystem.SAVE_FOLDER, stats._Name + ".json", "json"); // Ensure the JSON file extension
+
+        SaveSystem.Save(json, path);
     }
 
     // Read a JSON-formatted string from a file, then parse that string and
     // overwrite the CreatureStats of our object.
     public void Load()
     {
-        var stats = newCreature.GetComponent<CreatureStats>();
-        
+        var stats = newCreature.GetComponent<CreatureStats>(); 
         if (stats == null)
         {
-            Debug.Log("Creature object not found. Could not load data.\n");
+            // Make this an error log
+            Debug.Log("Creature object not found. Could not load data.\n"); 
             return;
         }
 
         string saveString = SaveSystem.Load();
-        
         if (saveString != null)
         {             
             JsonUtility.FromJsonOverwrite(saveString, stats);
+        }
+        else 
+        {
+            // Make this an error log
+            Debug.Log("Problems loading the creature file. Use a valid path and file extension.\n");
+            return;
         }
     }
 }
