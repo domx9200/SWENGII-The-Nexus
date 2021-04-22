@@ -2,7 +2,10 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEditor;
+<<<<<<< Updated upstream
+=======
 using TMPro;
+>>>>>>> Stashed changes
 
 public class FinishCreation : MonoBehaviour
 {
@@ -42,6 +45,12 @@ public class FinishCreation : MonoBehaviour
             var toMove = Instantiate(newCreature);
             var stats = toMove.GetComponent<CreatureStats>();
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
+<<<<<<< Updated upstream
+            
+            // Upon completion, display a popup to give the user the option to save their creature
+            if (EditorUtility.DisplayDialog("Save Creature?", 
+                "Would you like to save this creature to a JSON file?", "Yes", "No"))
+=======
             // Upon completion, display a popup to give the user the option to save their creature
             if (EditorUtility.DisplayDialog("Save Creature?", 
                 "Would you like to save this creature to a JSON file?", "Yes", "No"))
@@ -79,6 +88,7 @@ public class FinishCreation : MonoBehaviour
             }
 
             for(int i = 0; i < 3; i++)
+>>>>>>> Stashed changes
             {
                 // Only save if the user clicks "Yes"
                 JsonHandler myJsonHandler = new JsonHandler(toMove);
