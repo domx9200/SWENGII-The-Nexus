@@ -2,6 +2,10 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEditor;
+<<<<<<< Updated upstream
+=======
+using TMPro;
+>>>>>>> Stashed changes
 
 public class FinishCreation : MonoBehaviour
 {
@@ -41,10 +45,50 @@ public class FinishCreation : MonoBehaviour
             var toMove = Instantiate(newCreature);
             var stats = toMove.GetComponent<CreatureStats>();
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
+<<<<<<< Updated upstream
             
             // Upon completion, display a popup to give the user the option to save their creature
             if (EditorUtility.DisplayDialog("Save Creature?", 
                 "Would you like to save this creature to a JSON file?", "Yes", "No"))
+=======
+            // Upon completion, display a popup to give the user the option to save their creature
+            if (EditorUtility.DisplayDialog("Save Creature?", 
+                "Would you like to save this creature to a JSON file?", "Yes", "No"))
+            {
+                // Only save if the user clicks "Yes"
+                JsonHandler myJsonHandler = new JsonHandler(toMove);
+                myJsonHandler.Save();
+            }
+
+            var nameButton1 = toMove.transform.Find("NameAndShowStatsOpen").gameObject;
+            var nameButton2 = toMove.transform.Find("NameAndShowStatsClose").gameObject;
+
+            var HPText = toMove.transform.Find("Health").GetChild(1).gameObject.GetComponent<TMP_InputField>();
+            var HPPlaceholder = toMove.transform.Find("Health").GetChild(1).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+
+            var ACText = toMove.transform.Find("AC").GetChild(1).gameObject.GetComponent<TMP_InputField>();
+            var ACPlaceholder = toMove.transform.Find("AC").GetChild(1).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
+
+            var dropDown = toMove.transform.Find("DropDown").gameObject;
+
+            nameButton1.GetComponentInChildren<TextMeshProUGUI>().text = _creatureName;
+            nameButton2.GetComponentInChildren<TextMeshProUGUI>().text = _creatureName;
+
+            HPText.text = "" + _creatureHealth;
+            HPPlaceholder.text = "" + _creatureHealth;
+
+            ACText.text = "" + _armorClass;
+            ACPlaceholder.text = "" + _armorClass;
+
+            for(int i = 0; i < 6; i++)
+            {
+                dropDown.transform.GetChild(0).GetChild(8 + i).GetComponent<TextMeshProUGUI>().text = "" + abilities[i, 0];
+                dropDown.transform.GetChild(0).GetChild(15 + i).GetComponent<TextMeshProUGUI>().text = "" + abilities[i, 1];
+                dropDown.transform.GetChild(0).GetChild(22 + i).GetComponent<TextMeshProUGUI>().text = "" + abilities[i, 2];
+            }
+
+            for(int i = 0; i < 3; i++)
+>>>>>>> Stashed changes
             {
                 // Only save if the user clicks "Yes"
                 JsonHandler myJsonHandler = new JsonHandler(toMove);
