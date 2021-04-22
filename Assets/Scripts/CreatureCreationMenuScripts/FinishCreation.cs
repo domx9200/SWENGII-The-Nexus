@@ -27,7 +27,7 @@ public class FinishCreation : MonoBehaviour
             if(InputFields[i].text == "")
             {
                 //do error checking
-                IsntComplete = true;
+                //IsntComplete = true;
             } 
             else
             {
@@ -39,6 +39,7 @@ public class FinishCreation : MonoBehaviour
             int[,] abilities = {{ _strength[0], _strength[1], _strength[2] }, { _dexterity[0], _dexterity[1], _dexterity[2] }, { _constitution[0], _constitution[1], _constitution[2] },
                                 { _intelligence[0], _intelligence[1], _intelligence[2] }, { _wisdom[0], _wisdom[1], _wisdom[2] }, { _charisma[0], _charisma[1], _charisma[2] }};
             var toMove = Instantiate(newCreature);
+            toMove.name = _creatureName;
             var stats = toMove.GetComponent<CreatureStats>();
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
             JsonHandler myJsonHandler = new JsonHandler(toMove);

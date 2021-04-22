@@ -1,41 +1,41 @@
 {
-    "_Name": "intput",
-    "_HP": 120,
-    "_AC": 21,
-    "_Initiative": 7,
+    "_Name": "Todd",
+    "_HP": 0,
+    "_AC": 0,
+    "_Initiative": 0,
     "_Strength": [
-        10,
         0,
-        1
+        0,
+        0
     ],
     "_Dexterity": [
-        10,
         0,
-        1
+        0,
+        0
     ],
     "_Constitution": [
-        10,
         0,
-        1
+        0,
+        0
     ],
     "_Intelligence": [
-        10,
         0,
-        1
+        0,
+        0
     ],
     "_Wisdom": [
-        10,
         0,
-        1
+        0,
+        0
     ],
     "_Charisma": [
-        10,
         0,
-        1
+        0,
+        0
     ],
     "_Passives": [
-        15,
-        17,
-        19
+        0,
+        0,
+        0
     ]
 }

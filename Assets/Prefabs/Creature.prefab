@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8941177, g: 0.78823537, b: 0.5803922, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -363,7 +363,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8941177, g: 0.78823537, b: 0.5803922, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8941177, g: 0.7960785, b: 0.6117647, a: 1}
     m_PressedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
     m_SelectedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
@@ -3311,6 +3311,7 @@ GameObject:
   - component: {fileID: 3361931521325844820}
   - component: {fileID: 8039088339837717714}
   - component: {fileID: 6109096529310879510}
+  - component: {fileID: 2666975693111778}
   m_Layer: 5
   m_Name: Creature
   m_TagString: Untagged
@@ -3325,7 +3326,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4156433267011107774}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3342,7 +3343,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000076293945, y: -0.0000076293945}
+  m_AnchoredPosition: {x: 6.5, y: -0.0000076293945}
   m_SizeDelta: {x: 456.14264, y: 31.61026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8039088339837717714
@@ -3381,6 +3382,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Initiative: {fileID: 0}
+--- !u!95 &2666975693111778
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4156433267011107774}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ff12ac0024c5b674598950136d9532c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4213840802878929696
 GameObject:
   m_ObjectHideFlags: 0
@@ -6671,7 +6691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8941177, g: 0.78823537, b: 0.5803922, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6707,7 +6727,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8941177, g: 0.78823537, b: 0.5803922, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8941177, g: 0.7960785, b: 0.6117647, a: 1}
     m_PressedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
     m_SelectedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
@@ -7865,8 +7885,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 73.028, y: -18.68}
-  m_SizeDelta: {x: 309.99542, y: 8.853638}
+  m_AnchoredPosition: {x: 73.028, y: -18.32}
+  m_SizeDelta: {x: 309.99542, y: 8.135834}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6407225006703439630
 CanvasRenderer:
