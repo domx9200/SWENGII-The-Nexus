@@ -12,16 +12,24 @@ namespace Tests
 {
     public class JsonHandlerTests
     {
+        // Should fail if test is not written to despite having a save file to read from
+        [UnityTest]
+        public IEnumerator LoadFromFileSucceeds() 
+        {  
+            SaveSystem.Init();
+            yield return null;
+            string test = SaveSystem.Load();
+            Assert.IsTrue(test != null);           
+        }
+
         // Should fail if JsonHandler does not get called during OnCreatureFinish
         [UnityTest]
         public IEnumerator SaveCreatureToJson()
         {
-            DeleteSaveFolderBeforeTest();
-            yield return null;
             SceneManager.LoadScene("CreatureCreationMenu");
             yield return null;
             var inputs = Object.FindObjectsOfType<InputField>();
-            for(int i = 0; i < inputs.Length; i++)
+            for(int i = 0; i < inputs.Length; i++) // Manually insert inputs on the menu
             {
                 switch (inputs[i].transform.parent.name)
                 {
@@ -29,7 +37,7 @@ namespace Tests
                         inputs[i].text = "intput";
                         break;
                     case "creatureHealth":
-                        inputs[i].text = "120";
+                        inputs[i].text = "69";
                         break;
                     case "armorClass":
                         inputs[i].text = "21";
@@ -94,19 +102,19 @@ namespace Tests
                     case "insight":
                         inputs[i].text = "19";
                         break;
-
                 }
             }
 
             GameObject.Find("completeCreation").GetComponent<FinishCreation>().OnCreatureFinish();
             yield return null;
-            Assert.IsTrue(Directory.Exists(Application.dataPath + "/Saves/"));
+            
+            // Load the file we saved to, check that data is the same
+            var stats = Object.FindObjectOfType<CreatureStats>();
+            string json1 = JsonUtility.ToJson(stats, true);
+            string json2 = SaveSystem.Load();
+            Assert.AreEqual(json1, json2);
         }
 
-        public void DeleteSaveFolderBeforeTest()
-        {
-            DirectoryInfo directoryInfo = new DirectoryInfo(Application.dataPath + "/Saves/");
-            directoryInfo.Delete(true);
-        }
+        // Test similar to above, but on Save button 
     }
 }
