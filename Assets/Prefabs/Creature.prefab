@@ -303,7 +303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.97, y: 0}
+  m_AnchoredPosition: {x: -1.97, y: 0.000005722}
   m_SizeDelta: {x: 160, y: 28.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5191191900434027549
@@ -1006,7 +1006,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 190.53, y: 0}
+  m_AnchoredPosition: {x: 190.53, y: 0.0000047684}
   m_SizeDelta: {x: 75, y: 28.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &295251960941746202
@@ -1254,7 +1254,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -190.57, y: 0}
+  m_AnchoredPosition: {x: -190.57, y: 0.000061035}
   m_SizeDelta: {x: 75, y: 28.50003}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2996665068014607840
@@ -1330,7 +1330,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115.53, y: 0}
+  m_AnchoredPosition: {x: 115.53, y: 0.000011444}
   m_SizeDelta: {x: 75, y: 28.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &27526108819147626
@@ -3309,14 +3309,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3361931521325844820}
-<<<<<<< Updated upstream
   - component: {fileID: 8039088339837717714}
   - component: {fileID: 6109096529310879510}
-=======
-  - component: {fileID: 719022123473967138}
-  - component: {fileID: 522359152428523134}
-  - component: {fileID: 4463730412022356357}
->>>>>>> Stashed changes
   m_Layer: 5
   m_Name: Creature
   m_TagString: Untagged
@@ -3348,27 +3342,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
   m_AnchoredPosition: {x: -0.0000076293945, y: -0.0000076293945}
-=======
-  m_AnchoredPosition: {x: 0, y: 0}
->>>>>>> Stashed changes
   m_SizeDelta: {x: 456.14264, y: 31.61026}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &719022123473967138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4156433267011107774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74bb40eaa2298fd4a8621d5de7c4efe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Initiative: {fileID: 0}
---- !u!114 &522359152428523134
+--- !u!114 &8039088339837717714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3391,38 +3368,19 @@ MonoBehaviour:
   _Wisdom: 000000000000000000000000
   _Charisma: 000000000000000000000000
   _Passives: 000000000000000000000000
-<<<<<<< Updated upstream
 --- !u!114 &6109096529310879510
 MonoBehaviour:
-=======
---- !u!95 &4463730412022356357
-Animator:
-  serializedVersion: 3
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4156433267011107774}
   m_Enabled: 1
-<<<<<<< Updated upstream
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74bb40eaa2298fd4a8621d5de7c4efe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Initiative: {fileID: 0}
-=======
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ff12ac0024c5b674598950136d9532c3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
->>>>>>> Stashed changes
 --- !u!1 &4213840802878929696
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,7 +4027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -136.32, y: 0}
+  m_AnchoredPosition: {x: -136.32, y: 0.000015259}
   m_SizeDelta: {x: 34.78354, y: 31.61026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &498390942875764931
@@ -4152,7 +4110,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6109096529310879510}
         m_MethodName: SlideUp
         m_Mode: 1
         m_Arguments:
@@ -5306,7 +5264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -98.9, y: 0}
+  m_AnchoredPosition: {x: -98.9, y: -0.000015259}
   m_SizeDelta: {x: 34.783543, y: 31.61026}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3287136128168153554
@@ -5389,7 +5347,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6109096529310879510}
         m_MethodName: SlideDown
         m_Mode: 1
         m_Arguments:
@@ -7907,13 +7865,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-<<<<<<< Updated upstream
   m_AnchoredPosition: {x: 73.028, y: -18.68}
   m_SizeDelta: {x: 309.99542, y: 8.853638}
-=======
-  m_AnchoredPosition: {x: 73.028, y: -18.319824}
-  m_SizeDelta: {x: 309.99542, y: 8.135834}
->>>>>>> Stashed changes
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6407225006703439630
 CanvasRenderer:
