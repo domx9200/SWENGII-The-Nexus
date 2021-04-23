@@ -66,6 +66,8 @@ public class DropDownHandler : MonoBehaviour
             if (anim != null)
             {
                 anim.SetBool("open", true);
+                anim.SetInteger("status", 1);
+
             }
             else
             {
@@ -107,6 +109,7 @@ public class DropDownHandler : MonoBehaviour
             if (anim != null)
             {
                 anim.SetBool("open", false);
+                anim.SetInteger("status", 2);
             }
             else
             {
@@ -123,6 +126,11 @@ public class DropDownHandler : MonoBehaviour
 
         _dropDown.SetActive(!_dropDown.activeSelf);
         this.gameObject.SetActive(false); 
+        RectTransform contentRT = this.transform.parent.parent.parent.gameObject.GetComponent<RectTransform>();
+        contentRT.sizeDelta = new Vector2(0, contentRT.rect.height - 166.3731f);
+
+        _dropDown.SetActive(!_dropDown.activeSelf);
+        this.gameObject.SetActive(false);
 
         // Reset buttons
         this.gameObject.transform.GetComponent<Button>().enabled = true;

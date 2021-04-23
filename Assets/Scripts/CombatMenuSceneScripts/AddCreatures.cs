@@ -47,6 +47,15 @@ public class AddCreatures : MonoBehaviour
                 Debug.Log("newchild og pos " + creatures[i].transform.position);
                 creatures[i].transform.position = newChildSize;
                 Debug.Log("newchild new pos " + creatures[i].transform.position);
+                Debug.Log("Adding: " + creatures[i].name);
+                Debug.Log("Previous creatures: " + _initiativeList.transform.GetChild(_initiativeList.transform.childCount-1));
+                Vector2 lastChildPos = _initiativeList.transform.GetChild(_initiativeList.transform.childCount - 1).position;
+                Debug.Log("Position " +lastChildPos);
+                Debug.Log("old y: " + lastChildPos.y);
+                lastChildPos.y -= _creatureHeight;
+                Debug.Log("new y: " + lastChildPos.y);
+                creatures[i].transform.SetParent(_initiativeList.transform);
+                creatures[i].transform.position = lastChildPos;
 
                 // Change size of content to fit new creature
                 float childHeight = lastChild.GetComponent<RectTransform>().rect.height;
