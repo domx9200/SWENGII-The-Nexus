@@ -30,14 +30,16 @@ public class AddCreatures : MonoBehaviour
 
         for (int i = 0; i < creatures.Length; i++)
         {
-            if (_initiativeList.transform.childCount == 0)
+            // Set position of new creature
+            if (_initiativeList.transform.childCount == 1)
             {
-                Debug.Log("First creature in list: " + creatures[i]);
                 creatures[i].transform.SetParent(_initiativeList.transform);
-                creatures[i].transform.localPosition = Vector2.zero;
+                Debug.Log(_initiativeList.transform.childCount);
+                creatures[i].transform.position = _initiativeList.transform.GetChild(0).position;
             }
             else
             {
+                Debug.Log("Adding: " + creatures[i].name);
                 Debug.Log("Previous creatures: " + _initiativeList.transform.GetChild(_initiativeList.transform.childCount-1));
                 Vector2 lastChildPos = _initiativeList.transform.GetChild(_initiativeList.transform.childCount - 1).position;
                 Debug.Log("Position " +lastChildPos);

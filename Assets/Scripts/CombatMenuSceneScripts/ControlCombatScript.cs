@@ -10,6 +10,7 @@ public class ControlCombatScript : MonoBehaviour
     public GameObject CurrentTurn = null;
     public int TurnIndex = 0;
     public int RoundCount = 1;
+    [SerializeField] private GameObject _debugText;
 
     void Start()
     {
@@ -62,6 +63,12 @@ public class ControlCombatScript : MonoBehaviour
     // Method to remove a creature from the list (currently removes the creature that current is on
     public void RemoveCreature()
     {
+        if (Initiative.transform.childCount == 0)
+        {
+            StartCoroutine(ShowDebugMessage());
+            return;
+        }
+
         // First we need to check if we are trying to delete the first child in the list. If so we need to move everything up
         GameObject CurrentCreature = Initiative.transform.GetChild(TurnIndex).gameObject;
         if (CurrentCreature.name == Initiative.transform.GetChild(0).name)
@@ -98,5 +105,12 @@ public class ControlCombatScript : MonoBehaviour
         CurrentTurn.transform.position = new Vector3(CurrentTurn.transform.position.x, PreviousCreature.transform.position.y, CurrentTurn.transform.position.z);
         TurnIndex--;
         }
+    }
+
+    IEnumerator ShowDebugMessage()
+    {
+        _debugText.SetActive(!_debugText.activeSelf);
+        yield return new WaitForSeconds(3);
+        _debugText.SetActive(!_debugText.activeSelf);
     }
 }

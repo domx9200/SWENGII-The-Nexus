@@ -3183,6 +3183,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newCreature: {fileID: 4156433267011107774, guid: d2973b6cba76778449ec62fdcb8682b1,
     type: 3}
+  _buttonText: {fileID: 0}
+  _oldBkgdColor: {r: 1, g: 1, b: 1, a: 1}
+  _oldHighlightColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+  _newBkgdColor: {r: 1, g: 0.18396229, b: 0.18396229, a: 1}
+  _newHighlightColor: {r: 0.9607843, g: 0.14509805, b: 0.14509805, a: 1}
 --- !u!1 &899131217
 GameObject:
   m_ObjectHideFlags: 0

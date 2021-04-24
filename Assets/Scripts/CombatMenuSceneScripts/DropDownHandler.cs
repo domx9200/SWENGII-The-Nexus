@@ -46,8 +46,6 @@ public class DropDownHandler : MonoBehaviour
 
     IEnumerator WaitForOpenAnimation(float delay = 0)
     {
-<<<<<<< Updated upstream
-=======
         // Prevent double clicking
         this.gameObject.transform.GetComponent<Button>().enabled = false;
         this.gameObject.transform.parent.GetChild(2).GetComponent<Button>().enabled = false;
@@ -71,7 +69,6 @@ public class DropDownHandler : MonoBehaviour
             {
                 Debug.Log("tset 2/1");
                 anim.SetBool("open", true);
-                Debug.Log("test 3/1");
             }
             else
             {
@@ -79,10 +76,7 @@ public class DropDownHandler : MonoBehaviour
             }
         }
 
-        Debug.Log("test 4/1");
-
         // Anaimate
->>>>>>> Stashed changes
         yield return new WaitForSeconds(delay);
 
         Debug.Log("test 5/1");
@@ -93,8 +87,6 @@ public class DropDownHandler : MonoBehaviour
             child.gameObject.SetActive(!child.gameObject.activeSelf);
         }
         this.gameObject.SetActive(false);
-<<<<<<< Updated upstream
-=======
 
         Debug.Log("test 6/1");
 
@@ -104,13 +96,10 @@ public class DropDownHandler : MonoBehaviour
 
         Debug.Log("test 7/1");
 
->>>>>>> Stashed changes
     }
 
     IEnumerator WaitForCloseAnimation(float delay = 0)
     {
-<<<<<<< Updated upstream
-=======
         // Prevent double clicking
         this.gameObject.transform.GetComponent<Button>().enabled = false;
         this.gameObject.transform.parent.GetChild(1).GetComponent<Button>().enabled = false;
@@ -119,6 +108,9 @@ public class DropDownHandler : MonoBehaviour
         GameObject initList = transform.parent.parent.gameObject;
         int currIndex = transform.parent.GetSiblingIndex(); // index of current creature in init list
         Debug.Log("Creature collapsing is: " + initList.transform.GetChild(currIndex));
+
+        // Animate
+        yield return new WaitForSeconds(delay);
 
         // Loop through all creatures below current creature and animate
         for (int i = currIndex + 1; i < initList.transform.childCount; i++)
@@ -130,7 +122,6 @@ public class DropDownHandler : MonoBehaviour
             {
                 Debug.Log("Test 2/2");
                 anim.SetBool("open", false);
-                Debug.Log("test 3/2");
             }
             else
             {
@@ -138,12 +129,14 @@ public class DropDownHandler : MonoBehaviour
             }
         }
 
-        Debug.Log("test 4/2");
-
         // Animate
->>>>>>> Stashed changes
         yield return new WaitForSeconds(delay);
+        // Change size of scrollview
+        RectTransform contentRT = this.transform.parent.parent.parent.gameObject.GetComponent<RectTransform>();
+        contentRT.sizeDelta = new Vector2(0, contentRT.rect.height - 166.3731f);
+
         _dropDown.SetActive(!_dropDown.activeSelf);
         this.gameObject.SetActive(false);
     }
+
 }
