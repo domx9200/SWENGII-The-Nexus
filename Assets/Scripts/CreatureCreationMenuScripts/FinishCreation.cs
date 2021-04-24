@@ -44,7 +44,7 @@ public class FinishCreation : MonoBehaviour
             {
                 //do error checking
                 UpdateInputFieldColorsError(InputFields[i]);
-                IsntComplete = true;
+                //IsntComplete = true;
             } 
             else
             {

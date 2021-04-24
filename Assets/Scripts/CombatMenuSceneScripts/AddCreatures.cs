@@ -8,6 +8,7 @@ public class AddCreatures : MonoBehaviour
 {
     private Scene _CreatureDump;
     [SerializeField] private GameObject _InitiativeList;
+    [SerializeField] private GameObject _content;
     private float _CreatureHeight = 31.61026f;
 
     private void Awake()
@@ -36,22 +37,46 @@ public class AddCreatures : MonoBehaviour
     private void AddCreaturesMethod()
     {
         GameObject[] Creatures = _CreatureDump.GetRootGameObjects();
+        int j = 0;
 
-        for (int i = 0; i < Creatures.Length; i++)
+        GameObject[] newCreatures = new GameObject[Creatures[0].transform.childCount + Creatures.Length - 1];
+        Debug.Log("newcreatures length: " + newCreatures.Length);
+
+        if (Creatures[0].name == "InitiativeList")
+        {
+            for (int i = 0; i < Creatures[0].transform.childCount; i++)
+            {
+                newCreatures[i] = Creatures[0].transform.GetChild(i).gameObject;
+                Debug.Log(newCreatures[i].GetComponent<CreatureStats>()._Name);
+            }
+
+            for (int i = Creatures[0].transform.childCount; i < newCreatures.Length; i++)
+            {
+                newCreatures[i] = Creatures[i - Creatures[0].transform.childCount + 1];
+            }
+            j = 1;
+        }
+
+        for (int i = 0; i <  newCreatures.Length; i++)
         {
             if(_InitiativeList.transform.childCount == 0) 
             {
-                Creatures[i].transform.SetParent(_InitiativeList.transform);
-                Creatures[i].transform.localPosition = Vector2.zero;
+                newCreatures[i].transform.SetParent(_InitiativeList.transform);
+                newCreatures[i].GetComponent<CreatureMoveController>().updatePosAndMoveTo(0f);
             } 
             else
             {
                 Vector2 LastChildPos = _InitiativeList.transform.GetChild(_InitiativeList.transform.childCount - 1).transform.localPosition;
                 LastChildPos.y -= _CreatureHeight;
-                Creatures[i].transform.SetParent(_InitiativeList.transform);
-                Creatures[i].transform.localPosition = LastChildPos;
-                Creatures[i].GetComponent<CreatureMoveController>().updatePosAndMoveTo(LastChildPos.y);
+                newCreatures[i].transform.SetParent(_InitiativeList.transform);
+                newCreatures[i].transform.localPosition = LastChildPos;
+                newCreatures[i].GetComponent<CreatureMoveController>().updatePosAndMoveTo(LastChildPos.y);
             }
+        }
+
+        if (j == 1)
+        {
+            Destroy(Creatures[0]);
         }
     }
 }

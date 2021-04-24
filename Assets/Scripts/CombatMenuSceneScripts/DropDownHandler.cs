@@ -23,7 +23,7 @@ public class DropDownHandler : MonoBehaviour
     {
         if (_dropDown != null)
         {
-            _dropDown.SetActive(!_dropDown.activeSelf);
+            _dropDown.SetActive(true);
             bool isOpen = _dropDownAnimator.GetBool("open");
             _dropDownAnimator.SetBool("open", !isOpen);
             StartCoroutine(WaitForOpenAnimation(_dropDownAnimator.GetCurrentAnimatorStateInfo(0).length));
@@ -37,7 +37,7 @@ public class DropDownHandler : MonoBehaviour
             // Set all children inactive
             foreach (Transform child in _dropDown.transform)
             {
-                child.gameObject.SetActive(!child.gameObject.activeSelf);
+                child.gameObject.SetActive(false);
             }
             bool isOpen = _dropDownAnimator.GetBool("open");
             _dropDownAnimator.SetBool("open", !isOpen);
@@ -71,16 +71,17 @@ public class DropDownHandler : MonoBehaviour
         // Set all children active
         foreach (Transform child in _dropDown.transform)
         {
-            child.gameObject.SetActive(!child.gameObject.activeSelf);
+            child.gameObject.SetActive(true);
         }
-        this.gameObject.SetActive(false);
 
         // Reset buttons
         this.gameObject.transform.GetComponent<Button>().enabled = true;
         this.gameObject.transform.parent.GetChild(2).GetComponent<Button>().enabled = true;
+        _dropDown.transform.parent.GetChild(1).gameObject.SetActive(false);
+        _dropDown.transform.parent.GetChild(2).gameObject.SetActive(true);
     }
 
-    IEnumerator WaitForCloseAnimation(float delay = 0)
+    IEnumerator WaitForCloseAnimation(float delay = 0, bool isJank = false)
     {
         // Prevent double clicking
         this.gameObject.transform.GetComponent<Button>().enabled = false;
@@ -96,18 +97,28 @@ public class DropDownHandler : MonoBehaviour
             currCreature.GetComponent<CreatureMoveController>().updateMoveTo(newY);
         }
 
+        if (isJank)
+        {
+            // Change size of scrollview
+            RectTransform contentRT = this.transform.parent.parent.parent.GetComponent<RectTransform>();
+            contentRT.sizeDelta = new Vector2(0, contentRT.rect.height - _DropDownSize);
+        }
         // Animate
         yield return new WaitForSeconds(delay);
 
-        // Change size of scrollview
-        RectTransform contentRT = this.transform.parent.parent.parent.GetComponent<RectTransform>();
-        contentRT.sizeDelta = new Vector2(0, contentRT.rect.height - _DropDownSize);
+        if (!isJank)
+        {
+            // Change size of scrollview
+            RectTransform contentRT = this.transform.parent.parent.parent.GetComponent<RectTransform>();
+            contentRT.sizeDelta = new Vector2(0, contentRT.rect.height - _DropDownSize);
+        }
 
-        _dropDown.SetActive(!_dropDown.activeSelf);
-        this.gameObject.SetActive(false);
+        _dropDown.SetActive(false);
 
         // Reset buttons
         this.gameObject.transform.GetComponent<Button>().enabled = true;
         this.gameObject.transform.parent.GetChild(1).GetComponent<Button>().enabled = true;
+        _dropDown.transform.parent.GetChild(1).gameObject.SetActive(true);
+        _dropDown.transform.parent.GetChild(2).gameObject.SetActive(false);
     }
 }
