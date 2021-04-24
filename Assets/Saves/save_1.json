@@ -1,0 +1,41 @@
+{
+    "_Name": "q",
+    "_HP": 1,
+    "_AC": 1,
+    "_Initiative": 1,
+    "_Strength": [
+        1,
+        1,
+        1
+    ],
+    "_Dexterity": [
+        1,
+        1,
+        1
+    ],
+    "_Constitution": [
+        1,
+        1,
+        1
+    ],
+    "_Intelligence": [
+        1,
+        1,
+        1
+    ],
+    "_Wisdom": [
+        1,
+        1,
+        1
+    ],
+    "_Charisma": [
+        1,
+        1,
+        1
+    ],
+    "_Passives": [
+        1,
+        1,
+        1
+    ]
+}
