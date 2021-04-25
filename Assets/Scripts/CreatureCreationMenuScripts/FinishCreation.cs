@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
+using TMPro;
+//using SFB;
 
 public class FinishCreation : MonoBehaviour
 {
@@ -44,16 +43,18 @@ public class FinishCreation : MonoBehaviour
             var toMove = Instantiate(newCreature);
             var stats = toMove.GetComponent<CreatureStats>();
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
+            JsonHandler myJsonHandler = new JsonHandler(toMove);
+            myJsonHandler.Save();
             
+            /*
             // Upon completion, display a popup to give the user the option to save their creature
             if (EditorUtility.DisplayDialog("Save Creature?", 
                 "Would you like to save this creature to a JSON file?", "Yes", "No"))
             {
                 // Only save if the user clicks "Yes"
-                JsonHandler myJsonHandler = new JsonHandler(toMove);
-                myJsonHandler.Save();
+                
             }
-
+            */
             var nameButton1 = toMove.transform.Find("NameAndShowStatsOpen").gameObject;
             var nameButton2 = toMove.transform.Find("NameAndShowStatsClose").gameObject;
 

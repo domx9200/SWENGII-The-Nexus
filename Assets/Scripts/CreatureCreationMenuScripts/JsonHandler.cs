@@ -10,13 +10,12 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
+using SFB;
 
 public class JsonHandler 
 {
-    public GameObject newCreature = null;   
+    private GameObject newCreature = null;   
 
     public JsonHandler(GameObject creature)
     {
@@ -37,7 +36,7 @@ public class JsonHandler
         var stats = newCreature.GetComponent<CreatureStats>(); // Our CreatureStats 
         string json = JsonUtility.ToJson(stats, true);  // Convert the stats to a JSON string
         
-        string path = EditorUtility.SaveFilePanel("Save creature as JSON", 
+        string path = StandaloneFileBrowser.SaveFilePanel("Save creature as JSON", 
             SaveSystem.SAVE_FOLDER, stats._Name + ".json", "json"); // Ensure the JSON file extension
 
         SaveSystem.Save(json, path);

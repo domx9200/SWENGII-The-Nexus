@@ -11,9 +11,8 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
+using SFB;
 
 public static class SaveSystem
 {
@@ -40,7 +39,7 @@ public static class SaveSystem
     public static string Load()
     {
         // Open directory with OpenFilePanel 
-        string path = EditorUtility.OpenFilePanel("Load creature from JSON", SAVE_FOLDER, "json");
+        string path = StandaloneFileBrowser.OpenFilePanel("Load creature from JSON", SAVE_FOLDER, "json", false);
         string saveString = File.ReadAllText(path);
         
         if (path.Length != 0)
