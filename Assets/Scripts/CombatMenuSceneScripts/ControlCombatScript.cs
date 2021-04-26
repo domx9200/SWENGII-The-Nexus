@@ -10,10 +10,10 @@ public class ControlCombatScript : MonoBehaviour
     public GameObject CurrentTurn = null;
     public int TurnIndex = 0;
     public int RoundCount = 1;
+    
 
     void Start()
     {
-        Initiative = GameObject.Find("InitiativeList");
         CurrentTurn = GameObject.Find("CurrentTurn");
         RoundCounter = GameObject.Find("RoundCounterText");
         RoundCounter.GetComponent<Text>().text = "Round Count: " + RoundCount;
@@ -62,16 +62,22 @@ public class ControlCombatScript : MonoBehaviour
     // Method to remove a creature from the list (currently removes the creature that current is on
     public void RemoveCreature()
     {
+        if (Initiative.transform.childCount == 0)
+        {
+            return;
+        }
+
         // First we need to check if we are trying to delete the first child in the list. If so we need to move everything up
         GameObject CurrentCreature = Initiative.transform.GetChild(TurnIndex).gameObject;
         if (CurrentCreature.name == Initiative.transform.GetChild(0).name)
         {
-            Vector3 TopPosition = CurrentCreature.transform.position;
+            Vector3 TopPosition = CurrentCreature.transform.localPosition;
             Destroy(Initiative.transform.GetChild(TurnIndex).gameObject);
             for (int i = 0; i < Initiative.transform.childCount - 1; i++)
             {
-                Vector3 TempPosition = Initiative.transform.GetChild(i + 1).position;
-                Initiative.transform.GetChild(i + 1).position = TopPosition;
+                Vector3 TempPosition = Initiative.transform.GetChild(i + 1).localPosition;
+                Initiative.transform.GetChild(i + 1).localPosition = TopPosition;
+                Initiative.transform.GetChild(i + 1).GetComponent<CreatureMoveController>().updateMoveTo(TopPosition.y);
                 TopPosition = TempPosition;
             }
         }
@@ -79,12 +85,12 @@ public class ControlCombatScript : MonoBehaviour
         // If not the first position, we check to see if we are in the middle of the list
         else if (CurrentCreature.name != Initiative.transform.GetChild(0).name && CurrentCreature.name != Initiative.transform.GetChild(Initiative.transform.childCount - 1).name)
         {
-            Vector3 TopPosition = CurrentCreature.transform.position;
+            Vector3 TopPosition = CurrentCreature.transform.localPosition;
             Destroy(Initiative.transform.GetChild(TurnIndex).gameObject);
             for(int i = TurnIndex - 1; i < Initiative.transform.childCount - 1; i++)
             {
-                Vector3 TempPosition = Initiative.transform.GetChild(i + 1).position;
-                Initiative.transform.GetChild(i + 1).position = TopPosition;
+                Vector3 TempPosition = Initiative.transform.GetChild(i + 1).localPosition;
+                Initiative.transform.GetChild(i + 1).localPosition = TopPosition;
                 TopPosition = TempPosition;
             }
   
@@ -95,8 +101,22 @@ public class ControlCombatScript : MonoBehaviour
         {
         GameObject PreviousCreature = Initiative.transform.GetChild(TurnIndex - 1).gameObject;
         Destroy(Initiative.transform.GetChild(TurnIndex).gameObject);
-        CurrentTurn.transform.position = new Vector3(CurrentTurn.transform.position.x, PreviousCreature.transform.position.y, CurrentTurn.transform.position.z);
+        CurrentTurn.transform.localPosition = new Vector3(CurrentTurn.transform.localPosition.x, PreviousCreature.transform.localPosition.y, CurrentTurn.transform.localPosition.z);
         TurnIndex--;
         }
+
+        if (Initiative.transform.childCount == 0)
+        {
+            CurrentTurn.gameObject.SetActive(false);
+        }
+        else
+        {
+            CurrentTurn.gameObject.SetActive(true);
+        }
+    }
+
+    public void ChangeRoundCount()
+    {
+        RoundCounter.GetComponent<Text>().text = "Round Count: " + RoundCount;
     }
 }

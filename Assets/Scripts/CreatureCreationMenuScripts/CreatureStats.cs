@@ -9,6 +9,7 @@ public class CreatureStats : MonoBehaviour
     public int _HP, _AC, _Initiative;
     public int[] _Strength = new int[3], _Dexterity = new int[3], _Constitution = new int[3],
                   _Intelligence = new int[3], _Wisdom = new int[3], _Charisma = new int[3], _Passives = new int[3];
+    
 
     //constructor class for what will become the new creature, abilityStuff is a two dimensional array that
     //holds all ability info, this is so that we have less inputs. since there are six abilities, it should
