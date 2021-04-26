@@ -32,7 +32,6 @@ public static class SaveSystem
     public static void Save(string saveString, string path)
     {
         File.WriteAllText(path, saveString);
-        AssetDatabase.Refresh();
     }
 
     // Get data from a JSON file, then return it as a string
