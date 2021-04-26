@@ -16,6 +16,22 @@ public class FinishCreation : MonoBehaviour
                   _intelligence = new int[3], _wisdom = new int[3], _charisma = new int[3], _passives = new int[3];
     public GameObject newCreature = null;
     Scene creatureDump;
+    [SerializeField] private Color _oldBkgdColor;
+    [SerializeField] private Color _oldHighlightColor;
+    [SerializeField] private Color _newBkgdColor;
+    [SerializeField] private Color _newHighlightColor;
+
+    private void Update()
+    {
+        InputField[] InputFields = FindObjectsOfType<InputField>();
+        for (int i = 0; i < InputFields.Length; i++)
+        {
+            if (InputFields[i].text != "")
+            {
+                UpdateInputFieldColorsFull(InputFields[i]);
+            }
+        }
+    }
 
     public void OnCreatureFinish()
 	{
@@ -30,6 +46,7 @@ public class FinishCreation : MonoBehaviour
             if(InputFields[i].text == "")
             {
                 //do error checking
+                UpdateInputFieldColorsError(InputFields[i]);
                 IsntComplete = true;
             } 
             else
@@ -189,5 +206,21 @@ public class FinishCreation : MonoBehaviour
                 Debug.Log(_charisma[index]);
                 break;
         }
+    }
+
+    private void UpdateInputFieldColorsError(InputField CurrentField)
+    {
+        ColorBlock cb = CurrentField.colors;
+        cb.normalColor = _newBkgdColor;
+        cb.highlightedColor = _newHighlightColor;
+        CurrentField.colors = cb;
+    }
+
+    private void UpdateInputFieldColorsFull(InputField CurrentField)
+    {
+        ColorBlock cb = CurrentField.colors;
+        cb.normalColor = _oldBkgdColor;
+        cb.highlightedColor = _oldHighlightColor;
+        CurrentField.colors = cb;
     }
 }
