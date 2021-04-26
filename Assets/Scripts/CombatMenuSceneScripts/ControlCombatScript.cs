@@ -14,7 +14,6 @@ public class ControlCombatScript : MonoBehaviour
 
     void Start()
     {
-        Initiative = GameObject.Find("InitiativeList");
         CurrentTurn = GameObject.Find("CurrentTurn");
         RoundCounter = GameObject.Find("RoundCounterText");
         RoundCounter.GetComponent<Text>().text = "Round Count: " + RoundCount;
@@ -114,5 +113,10 @@ public class ControlCombatScript : MonoBehaviour
         {
             CurrentTurn.gameObject.SetActive(true);
         }
+    }
+
+    public void ChangeRoundCount()
+    {
+        RoundCounter.GetComponent<Text>().text = "Round Count: " + RoundCount;
     }
 }

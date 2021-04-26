@@ -76,6 +76,14 @@ public class AddCreatures : MonoBehaviour
 
         if (j == 1)
         {
+            var temp = Creatures[0].GetComponent<ControlCombatScript>();
+            ControlCombatScript CurrentTurn = GameObject.Find("CurrentTurn").GetComponent<ControlCombatScript>();
+            CurrentTurn.TurnIndex = temp.TurnIndex - 1;
+            CurrentTurn.RoundCount = temp.RoundCount;
+            if (CurrentTurn.TurnIndex < 0)
+                CurrentTurn.TurnIndex = 0;
+            else
+                CurrentTurn.NextTurn();
             Destroy(Creatures[0]);
         }
     }

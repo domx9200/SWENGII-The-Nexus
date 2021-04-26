@@ -7,12 +7,6 @@ public class ChangeMenusScript : MonoBehaviour
 {
     private Scene _creatureDump;
     [SerializeField] private GameObject _initiativeList = null;
-    [SerializeField] private GameObject _loadingImage = null;
-
-    public void OnMainMenuClick()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
 
     public void OnAddCreatureClick()
     {
@@ -23,11 +17,6 @@ public class ChangeMenusScript : MonoBehaviour
 
         for (int i = 0; i < _initiativeList.transform.childCount; i++)
         {
-            //if (_initiativeList.transform.GetChild(i).GetChild(7).GetComponent<Animator>().GetBool("open") == true)
-            //{
-            //    Debug.Log(_initiativeList.transform.GetChild(i).GetChild(2).GetComponent<DropDownHandler>());
-            //    _initiativeList.transform.GetChild(i).GetChild(2).GetComponent<DropDownHandler>().CloseDropDown(true);
-            //}
             for (int j = 0; j < _initiativeList.transform.GetChild(i).GetChild(7).childCount; j++)
             {
                 _initiativeList.transform.GetChild(i).GetChild(7).GetChild(j).gameObject.SetActive(false);
@@ -38,6 +27,12 @@ public class ChangeMenusScript : MonoBehaviour
             _initiativeList.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
             _initiativeList.transform.GetChild(i).GetChild(2).gameObject.SetActive(false);
         }
+
+        _initiativeList.AddComponent<ControlCombatScript>();
+        ControlCombatScript temp = _initiativeList.GetComponent<ControlCombatScript>();
+        ControlCombatScript CurrentTurn = _initiativeList.transform.parent.GetChild(0).GetComponent<ControlCombatScript>();
+        temp.TurnIndex = CurrentTurn.TurnIndex;
+        temp.RoundCount = CurrentTurn.RoundCount;
 
         _initiativeList.transform.parent = null;
         SceneManager.MoveGameObjectToScene(_initiativeList, _creatureDump);
