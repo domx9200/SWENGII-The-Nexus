@@ -36,10 +36,11 @@ public static class SaveSystem
     }
 
     // Get data from a JSON file, then return it as a string
+    // Loads one file per call
     public static string Load()
     {
         // Open directory with OpenFilePanel 
-        string path = StandaloneFileBrowser.OpenFilePanel("Load creature from JSON", SAVE_FOLDER, "json", false);
+        string path = StandaloneFileBrowser.OpenFilePanel("Load creature from JSON", SAVE_FOLDER, "json", false)[0];
         string saveString = File.ReadAllText(path);
         
         if (path.Length != 0)
