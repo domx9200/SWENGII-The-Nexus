@@ -1,69 +1,55 @@
 ﻿/*
     JsonHandler class definition. Used for conversions of creature stats into 
     JSON-formatted strings and vice-versa. 
-    
-    Designed to be called once a creature has been completed or when choosing
-    to save or load a creature.  
 */
 
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
-using SFB;
 
-public class JsonHandler 
+public static class JsonHandler 
 {
-    private GameObject newCreature = null;   
+    public static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";  // Default directory for save files   
 
-    public JsonHandler(GameObject creature)
+    public static void Init()
     {
-        newCreature = creature;
-        SaveSystem.Init();
+        // Test if save folder exists
+        if (!Directory.Exists(SAVE_FOLDER))
+        {
+            // Create save folder
+            Directory.CreateDirectory(SAVE_FOLDER);
+        }        
     }
 
     // Convert the object's CreatureStats to a JSON-formatted string
     // then write that string to a file.
-    public void Save()
-    {       
-        if (newCreature == null)
-        {
-            // Make this an error log
-            Debug.Log("Creature object not found. Could not save data.\n"); 
-            return;
-        }
-        var stats = newCreature.GetComponent<CreatureStats>(); // Our CreatureStats 
-        string json = JsonUtility.ToJson(stats, true);  // Convert the stats to a JSON string
-        
-        string path = StandaloneFileBrowser.SaveFilePanel("Save creature as JSON", 
-            SaveSystem.SAVE_FOLDER, stats._Name + ".json", "json"); // Ensure the JSON file extension
+    public static void Save(CreatureStats stats)
+    {        
+        string json = JsonUtility.ToJson(stats, true); 
+        string path = SAVE_FOLDER + stats._Name + ".json";
 
-        SaveSystem.Save(json, path);
+        File.WriteAllText(path, json);
     }
 
-    // Read a JSON-formatted string from a file, then parse that string and
-    // overwrite the CreatureStats of our object.
-    public void Load()
+    // Reads from a creature file and returns the stats in a 
+    // JSON-formatted string
+    public static StatsData Load(string filename)
     {
-        var stats = newCreature.GetComponent<CreatureStats>(); 
-        if (stats == null)
-        {
-            // Make this an error log
-            Debug.Log("Creature object not found. Could not load data.\n"); 
-            return;
-        }
+        string path = SAVE_FOLDER + filename + ".json";
+        StatsData data = new StatsData(); 
 
-        string saveString = SaveSystem.Load();
-        if (saveString != null)
-        {             
-            JsonUtility.FromJsonOverwrite(saveString, stats);
+        if (File.Exists(path))
+        {   
+            string json = File.ReadAllText(path);
+            JsonUtility.FromJsonOverwrite(json, data);          
+            return data;
         }
         else 
         {
-            // Make this an error log
-            Debug.Log("Problems loading the creature file. Use a valid path and file extension.\n");
-            return;
+            Debug.LogError("Problems loading the creature file. Use a valid path and file extension.\n");
+            return null;
         }
     }
+    
 }

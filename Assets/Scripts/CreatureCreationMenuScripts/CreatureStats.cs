@@ -31,4 +31,39 @@ public class CreatureStats : MonoBehaviour
         }
         _Passives = passives;
     }
+
+    public void SetValues(StatsData stats) 
+    {
+        _Name = stats._Name;
+        _HP = stats._HP;
+        _AC = stats._AC;
+        _Initiative = stats._Initiative;
+
+        _Strength = stats._Strength;
+        _Dexterity = stats._Dexterity;
+        _Constitution = stats._Constitution;
+        _Intelligence = stats._Intelligence;
+        _Wisdom = stats._Wisdom;
+        _Charisma = stats._Charisma;
+        _Passives = stats._Passives;
+    }
+
+    public StatsData GetValues() 
+    {
+        StatsData data = new StatsData(this);
+        return data;
+    }
+
+    public void SaveValues()
+    {
+        JsonHandler.Save(this);
+    }
+
+    // Need to get file name at runtime
+    public void LoadValues()
+    {
+        StatsData data = JsonHandler.Load("intput");
+        // overwrite
+        this.SetValues(data);
+    }
 }
