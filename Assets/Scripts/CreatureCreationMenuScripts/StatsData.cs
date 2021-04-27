@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/*
+    StatsData simple class, made for simplifying the access of
+    CreatureStats variables
+*/
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -24,19 +24,16 @@ public static class JsonHandler
 
     // Convert the object's CreatureStats to a JSON-formatted string
     // then write that string to a file.
-    public static void Save(CreatureStats stats)
+    public static void Save(CreatureStats stats, string path)
     {        
         string json = JsonUtility.ToJson(stats, true); 
-        string path = SAVE_FOLDER + stats._Name + ".json";
 
         File.WriteAllText(path, json);
     }
 
-    // Reads from a creature file and returns the stats in a 
-    // JSON-formatted string
-    public static StatsData Load(string filename)
+    // Reads from a creature file and returns the stats
+    public static StatsData Load(string path)
     {
-        string path = SAVE_FOLDER + filename + ".json";
         StatsData data = new StatsData(); 
 
         if (File.Exists(path))

@@ -32,6 +32,7 @@ public class FinishCreation : MonoBehaviour
 
     public void OnCreatureFinish()
 	{
+        JsonHandler.Init();
 		InputField[] InputFields = FindObjectsOfType<InputField>();
         bool IsntComplete = false;
 		if (SceneManager.GetSceneByName("CreatureDump").name == null)
@@ -58,6 +59,14 @@ public class FinishCreation : MonoBehaviour
             var toMove = Instantiate(newCreature);
             var stats = toMove.GetComponent<CreatureStats>();
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
+
+            // comment out dummy conditional to keep the build from delaying
+            /*
+            if(true)
+            {
+                stats.SaveValues();
+            }
+            */
 
             var nameButton1 = toMove.transform.Find("NameAndShowStatsOpen").gameObject;
             var nameButton2 = toMove.transform.Find("NameAndShowStatsClose").gameObject;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SFB;
 
 public class CreatureStats : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class CreatureStats : MonoBehaviour
     public int _HP, _AC, _Initiative;
     public int[] _Strength = new int[3], _Dexterity = new int[3], _Constitution = new int[3],
                   _Intelligence = new int[3], _Wisdom = new int[3], _Charisma = new int[3], _Passives = new int[3];
-    
 
     //constructor class for what will become the new creature, abilityStuff is a two dimensional array that
     //holds all ability info, this is so that we have less inputs. since there are six abilities, it should
@@ -32,20 +32,21 @@ public class CreatureStats : MonoBehaviour
         _Passives = passives;
     }
 
-    public void SetValues(StatsData stats) 
+    // Overload of SetValues compatible with StatsData
+    public void SetValues(StatsData data) 
     {
-        _Name = stats._Name;
-        _HP = stats._HP;
-        _AC = stats._AC;
-        _Initiative = stats._Initiative;
+        _Name = data._Name;
+        _HP = data._HP;
+        _AC = data._AC;
+        _Initiative = data._Initiative;
 
-        _Strength = stats._Strength;
-        _Dexterity = stats._Dexterity;
-        _Constitution = stats._Constitution;
-        _Intelligence = stats._Intelligence;
-        _Wisdom = stats._Wisdom;
-        _Charisma = stats._Charisma;
-        _Passives = stats._Passives;
+        _Strength = data._Strength;
+        _Dexterity = data._Dexterity;
+        _Constitution = data._Constitution;
+        _Intelligence = data._Intelligence;
+        _Wisdom = data._Wisdom;
+        _Charisma = data._Charisma;
+        _Passives = data._Passives;
     }
 
     public StatsData GetValues() 
@@ -56,13 +57,16 @@ public class CreatureStats : MonoBehaviour
 
     public void SaveValues()
     {
-        JsonHandler.Save(this);
+        string path = StandaloneFileBrowser.SaveFilePanel("Save creature as JSON", 
+            JsonHandler.SAVE_FOLDER, _Name + ".json", "json"); // Ensure the JSON file extension")
+        JsonHandler.Save(this, path);
     }
 
     // Need to get file name at runtime
     public void LoadValues()
     {
-        StatsData data = JsonHandler.Load("intput");
+        string path = StandaloneFileBrowser.OpenFilePanel("Load creature from JSON", JsonHandler.SAVE_FOLDER, "json", false)[0];
+        StatsData data = JsonHandler.Load(path);
         // overwrite
         this.SetValues(data);
     }
