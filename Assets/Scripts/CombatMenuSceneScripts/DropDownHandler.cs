@@ -8,6 +8,7 @@ public class DropDownHandler : MonoBehaviour
     [SerializeField] private GameObject _dropDown;
     private Animator _dropDownAnimator;
     private float _DropDownSize = 166.3731f;
+    public bool _IsActive = false;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class DropDownHandler : MonoBehaviour
         if (_dropDown != null)
         {
             _dropDown.SetActive(true);
+            _IsActive = true;
             bool isOpen = _dropDownAnimator.GetBool("open");
             _dropDownAnimator.SetBool("open", !isOpen);
             StartCoroutine(WaitForOpenAnimation(_dropDownAnimator.GetCurrentAnimatorStateInfo(0).length));
@@ -39,6 +41,8 @@ public class DropDownHandler : MonoBehaviour
             {
                 child.gameObject.SetActive(false);
             }
+            transform.parent.GetChild(1).gameObject.SetActive(true);
+            _IsActive = false;
             bool isOpen = _dropDownAnimator.GetBool("open");
             _dropDownAnimator.SetBool("open", !isOpen);
             StartCoroutine(WaitForCloseAnimation(_dropDownAnimator.GetCurrentAnimatorStateInfo(0).length));
@@ -57,7 +61,6 @@ public class DropDownHandler : MonoBehaviour
 
         GameObject initList = _dropDown.transform.parent.parent.gameObject;
         int currIndex = _dropDown.transform.parent.GetSiblingIndex();
-
         for(int i = currIndex + 1; i < initList.transform.childCount; i++)
         {
             var currCreature = initList.transform.GetChild(i).gameObject;
@@ -79,6 +82,9 @@ public class DropDownHandler : MonoBehaviour
         this.gameObject.transform.parent.GetChild(2).GetComponent<Button>().enabled = true;
         _dropDown.transform.parent.GetChild(1).gameObject.SetActive(false);
         _dropDown.transform.parent.GetChild(2).gameObject.SetActive(true);
+        var currentTurn = initList.transform.parent.GetChild(0).gameObject;
+        int currTurnIndex = currentTurn.GetComponent<ControlCombatScript>().TurnIndex;
+        currentTurn.transform.position = new Vector2(51.10001f, initList.transform.GetChild(currTurnIndex).position.y);
     }
 
     IEnumerator WaitForCloseAnimation(float delay = 0, bool isJank = false)
@@ -89,7 +95,6 @@ public class DropDownHandler : MonoBehaviour
 
         GameObject initList = _dropDown.transform.parent.parent.gameObject;
         int currIndex = _dropDown.transform.parent.GetSiblingIndex();
-
         for (int i = currIndex + 1; i < initList.transform.childCount; i++)
         {
             var currCreature = initList.transform.GetChild(i).gameObject;
@@ -97,21 +102,12 @@ public class DropDownHandler : MonoBehaviour
             currCreature.GetComponent<CreatureMoveController>().updateMoveTo(newY);
         }
 
-        if (isJank)
-        {
-            // Change size of scrollview
-            RectTransform contentRT = this.transform.parent.parent.parent.GetComponent<RectTransform>();
-            contentRT.sizeDelta = new Vector2(0, contentRT.rect.height - _DropDownSize);
-        }
         // Animate
         yield return new WaitForSeconds(delay);
 
-        if (!isJank)
-        {
-            // Change size of scrollview
-            RectTransform contentRT = this.transform.parent.parent.parent.GetComponent<RectTransform>();
-            contentRT.sizeDelta = new Vector2(0, contentRT.rect.height - _DropDownSize);
-        }
+        // Change size of scrollview
+        RectTransform contentRT = this.transform.parent.parent.parent.GetComponent<RectTransform>();
+        contentRT.sizeDelta = new Vector2(0, contentRT.rect.height - _DropDownSize);
 
         _dropDown.SetActive(false);
 
@@ -120,5 +116,8 @@ public class DropDownHandler : MonoBehaviour
         this.gameObject.transform.parent.GetChild(1).GetComponent<Button>().enabled = true;
         _dropDown.transform.parent.GetChild(1).gameObject.SetActive(true);
         _dropDown.transform.parent.GetChild(2).gameObject.SetActive(false);
+        var currentTurn = initList.transform.parent.GetChild(0).gameObject;
+        int currTurnIndex = currentTurn.GetComponent<ControlCombatScript>().TurnIndex;
+        currentTurn.transform.position = new Vector2(51.10001f, initList.transform.GetChild(currTurnIndex).position.y);
     }
 }
