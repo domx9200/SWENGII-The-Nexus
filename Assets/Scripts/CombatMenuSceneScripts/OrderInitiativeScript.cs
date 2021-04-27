@@ -39,12 +39,33 @@ public class OrderInitiativeScript : MonoBehaviour
             float TopPos = this.transform.localPosition.y;
             float BotPos = BottomPosition.transform.localPosition.y;
 
+            if (gameObject.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && !BottomPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
+            {
+                BotPos = transform.localPosition.y - 31.61026f;
+                gameObject.GetComponent<CreatureMoveController>().speed = 0.5f;
+            } else if(!gameObject.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && BottomPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
+            {
+                BotPos = transform.localPosition.y - 31.61026f - 166.3731f;
+                BottomPosition.GetComponent<CreatureMoveController>().speed = 0.5f;
+            }
+
             gameObject.GetComponent<CreatureMoveController>().updateMoveTo(BotPos);
             BottomPosition.GetComponent<CreatureMoveController>().updateMoveTo(TopPos);
 
             BottomPosition.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
             this.transform.SetSiblingIndex(SwapIndex);
+            StartCoroutine(WaitForSwap(0.7f, gameObject.GetComponent<CreatureMoveController>()));
+            StartCoroutine(WaitForSwap(0.7f, BottomPosition.GetComponent<CreatureMoveController>()));
         }
+    }
+
+    private IEnumerator WaitForSwap(float timeToWait, CreatureMoveController toChange)
+    {
+        yield return new WaitForSeconds(timeToWait);
+        toChange.speed = 2.7f;
+        yield return new WaitForSeconds(0.2f);
+        GameObject currentTurn = Initiative.transform.parent.GetChild(0).gameObject;
+        currentTurn.transform.position = new Vector2(51.10001f, Initiative.transform.GetChild(currentTurn.GetComponent<ControlCombatScript>().TurnIndex).position.y);
     }
 
     // Method to move initiatives up in the list
@@ -64,11 +85,26 @@ public class OrderInitiativeScript : MonoBehaviour
             float BotPos = this.transform.localPosition.y;
             float TopPos =  TopPosition.transform.localPosition.y;
 
+            if (!gameObject.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && TopPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
+            {
+                BotPos = TopPosition.transform.localPosition.y - 31.61026f;
+                TopPosition.gameObject.GetComponent<CreatureMoveController>().speed = 0.5f;
+            }
+            else if (gameObject.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && !TopPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
+            {
+                BotPos = TopPosition.transform.localPosition.y - 31.61026f - 166.3731f;
+                Debug.Log(BotPos);
+                gameObject.GetComponent<CreatureMoveController>().speed = 0.5f;
+            }
+
             gameObject.GetComponent<CreatureMoveController>().updateMoveTo(TopPos);
             TopPosition.GetComponent<CreatureMoveController>().updateMoveTo(BotPos);
 
             TopPosition.transform.SetSiblingIndex(this.transform.GetSiblingIndex());
             this.transform.SetSiblingIndex(SwapIndex);
+
+            StartCoroutine(WaitForSwap(0.7f, gameObject.GetComponent<CreatureMoveController>()));
+            StartCoroutine(WaitForSwap(0.7f, TopPosition.GetComponent<CreatureMoveController>()));
         }
     }
 }

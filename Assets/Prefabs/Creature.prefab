@@ -410,6 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dropDown: {fileID: 7864836336758211978}
+  _IsActive: 0
 --- !u!1 &553571238122330292
 GameObject:
   m_ObjectHideFlags: 0
@@ -6625,7 +6626,7 @@ GameObject:
   - component: {fileID: 7640092266702387192}
   - component: {fileID: 2603823532400698150}
   - component: {fileID: 5775040276990673795}
-  - component: {fileID: 6959307234268098793}
+  - component: {fileID: 2270742984859520424}
   m_Layer: 5
   m_Name: NameAndShowStatsClose
   m_TagString: Untagged
@@ -6733,7 +6734,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6959307234268098793}
+      - m_Target: {fileID: 2270742984859520424}
         m_MethodName: CloseDropDown
         m_Mode: 1
         m_Arguments:
@@ -6744,7 +6745,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &6959307234268098793
+--- !u!114 &2270742984859520424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6757,6 +6758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dropDown: {fileID: 7864836336758211978}
+  _IsActive: 0
 --- !u!1 &7335230788841337859
 GameObject:
   m_ObjectHideFlags: 0
