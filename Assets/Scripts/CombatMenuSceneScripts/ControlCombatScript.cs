@@ -23,6 +23,14 @@ public class ControlCombatScript : MonoBehaviour
     public void SortInitiative()
     {
         int n = Initiative.transform.childCount;
+        Vector3[] Positions = new Vector3[n];
+        // Make an array of positions to use later for fixing the positions
+        for (int i = 0; i < n; i++)
+        {
+            Positions[i] = Initiative.transform.GetChild(i).localPosition;
+            Debug.Log(Positions[i]);
+        }
+
         for (int i = 0; i < n - 1; i++)
             for (int j = 0; j < n - i - 1; j++)
                 if (Initiative.transform.GetChild(j).GetComponent<CreatureStats>()._Initiative < Initiative.transform.GetChild(j + 1).GetComponent<CreatureStats>()._Initiative)
@@ -31,10 +39,35 @@ public class ControlCombatScript : MonoBehaviour
                     GameObject TopPosition = Initiative.transform.GetChild(j).gameObject;
                     GameObject BottomPosition = Initiative.transform.GetChild(j + 1).gameObject;
 
-                    // Currently just swaps in the hierarchy. Need to figure out how to change on screen.
                     TopPosition.transform.SetSiblingIndex(j + 1);
                     BottomPosition.transform.SetSiblingIndex(j);
                 }
+
+        // Now need to actually fix the positions on screen
+        for (int i = 0; i < n; i++)
+        {
+            GameObject PositionToChange = Initiative.transform.GetChild(i).gameObject;
+            GameObject PreviousPosition = null;
+            if ((i - 1) >= 0)
+            {
+                PreviousPosition = Initiative.transform.GetChild(i - 1).gameObject;
+            }
+            float ChangePos = Positions[i].y;
+
+            
+            if (PreviousPosition != null && !PositionToChange.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && PreviousPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
+            {
+                ChangePos -= 166.3731f;
+            }
+            else if (PreviousPosition != null && PositionToChange.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && !PreviousPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
+            {
+                ChangePos += 166.3731f;
+            }
+
+            PositionToChange.GetComponent<CreatureMoveController>().updateMoveTo(ChangePos);
+
+
+        }
     }
 
     // Method to advance to the next turn, and advance the round counter as necessary.
