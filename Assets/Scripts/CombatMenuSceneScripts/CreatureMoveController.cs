@@ -23,4 +23,9 @@ public class CreatureMoveController : MonoBehaviour
     {
         gameObject.transform.localPosition = Vector2.MoveTowards(transform.localPosition, moveTo, speed);
     }
+
+    public Vector2 GetMoveTo()
+    {
+        return moveTo;
+    } 
 }

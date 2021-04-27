@@ -1,41 +1,41 @@
 {
-    "_Name": "r",
-    "_HP": 1,
-    "_AC": 1,
-    "_Initiative": 1,
+    "_Name": "w",
+    "_HP": 0,
+    "_AC": 0,
+    "_Initiative": 0,
     "_Strength": [
-        1,
-        1,
-        1
+        0,
+        0,
+        0
     ],
     "_Dexterity": [
-        1,
-        1,
-        1
+        0,
+        0,
+        0
     ],
     "_Constitution": [
-        1,
-        1,
-        1
+        0,
+        0,
+        0
     ],
     "_Intelligence": [
-        1,
-        1,
-        1
+        0,
+        0,
+        0
     ],
     "_Wisdom": [
-        1,
-        1,
-        1
+        0,
+        0,
+        0
     ],
     "_Charisma": [
-        1,
-        1,
-        1
+        0,
+        0,
+        0
     ],
     "_Passives": [
-        1,
-        1,
-        1
+        0,
+        0,
+        0
     ]
 }
