@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 218013851}
   - component: {fileID: 218013850}
   m_Layer: 5
-  m_Name: RemoveCreature (1)
+  m_Name: SortInitiative
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8941177, g: 0.78823537, b: 0.5803922, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8941177, g: 0.7960785, b: 0.6117647, a: 1}
     m_PressedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
     m_SelectedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
@@ -318,7 +318,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 218013851}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1424991986}
+        m_MethodName: SortInitiative
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &218013851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,7 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.89411765, g: 0.7882353, b: 0.5803922, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -866,7 +877,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8941177, g: 0.78823537, b: 0.5803922, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8941177, g: 0.7960785, b: 0.6117647, a: 1}
     m_PressedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
     m_SelectedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
@@ -913,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.89411765, g: 0.7882353, b: 0.5803922, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1877,7 +1888,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 992009804}
   m_HandleRect: {fileID: 992009803}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2016,7 +2027,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8941177, g: 0.78823537, b: 0.5803922, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8941177, g: 0.7960785, b: 0.6117647, a: 1}
     m_PressedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
     m_SelectedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
@@ -2074,7 +2085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.89411765, g: 0.7882353, b: 0.5803922, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2171,7 +2182,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8941177, g: 0.78823537, b: 0.5803922, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8941177, g: 0.7960785, b: 0.6117647, a: 1}
     m_PressedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
     m_SelectedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
@@ -2218,7 +2229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.89411765, g: 0.7882353, b: 0.5803922, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2856,7 +2867,7 @@ GameObject:
   - component: {fileID: 1709055296}
   - component: {fileID: 1709055295}
   m_Layer: 5
-  m_Name: RemoveCreatureText
+  m_Name: SortInitiativeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3058,8 +3069,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 319532946}
   m_HandleRect: {fileID: 319532945}
   m_Direction: 2
-  m_Value: 1.0000011
-  m_Size: 0.81999993
+  m_Value: 1.0000017
+  m_Size: 0.8200001
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3160,7 +3171,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.8941177, g: 0.78823537, b: 0.5803922, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.8941177, g: 0.7960785, b: 0.6117647, a: 1}
     m_PressedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
     m_SelectedColor: {r: 0.8588236, g: 0.70980394, b: 0.454902, a: 1}
@@ -3207,7 +3218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.89411765, g: 0.7882353, b: 0.5803922, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
