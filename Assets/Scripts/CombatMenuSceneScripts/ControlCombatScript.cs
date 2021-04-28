@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ControlCombatScript : MonoBehaviour
 {
@@ -23,17 +24,15 @@ public class ControlCombatScript : MonoBehaviour
     public void SortInitiative()
     {
         int n = Initiative.transform.childCount;
-        Vector3[] Positions = new Vector3[n];
-        // Make an array of positions to use later for fixing the positions
-        for (int i = 0; i < n; i++)
-        {
-            Positions[i] = Initiative.transform.GetChild(i).localPosition;
-            Debug.Log(Positions[i]);
-        }
-
         for (int i = 0; i < n - 1; i++)
+        {
             for (int j = 0; j < n - i - 1; j++)
-                if (Initiative.transform.GetChild(j).GetComponent<CreatureStats>()._Initiative < Initiative.transform.GetChild(j + 1).GetComponent<CreatureStats>()._Initiative)
+            {
+                int jInit = 0;
+                int J1Init = 0;
+                int.TryParse(Initiative.transform.GetChild(j).GetChild(0).GetChild(0).GetComponent<TMP_InputField>().text, out jInit);
+                int.TryParse(Initiative.transform.GetChild(j + 1).GetChild(0).GetChild(0).GetComponent<TMP_InputField>().text, out J1Init);
+                if (jInit < J1Init)
                 {
                     // Swap their positions
                     GameObject TopPosition = Initiative.transform.GetChild(j).gameObject;
@@ -42,31 +41,20 @@ public class ControlCombatScript : MonoBehaviour
                     TopPosition.transform.SetSiblingIndex(j + 1);
                     BottomPosition.transform.SetSiblingIndex(j);
                 }
+            }
+        }
 
-        // Now need to actually fix the positions on screen
-        for (int i = 0; i < n; i++)
+        float offset = 0f;
+        for(int i = 0; i < n; i++)
         {
-            GameObject PositionToChange = Initiative.transform.GetChild(i).gameObject;
-            GameObject PreviousPosition = null;
-            if ((i - 1) >= 0)
-            {
-                PreviousPosition = Initiative.transform.GetChild(i - 1).gameObject;
-            }
-            float ChangePos = Positions[i].y;
-
-            
-            if (PreviousPosition != null && !PositionToChange.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && PreviousPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
-            {
-                ChangePos -= 166.3731f;
-            }
-            else if (PreviousPosition != null && PositionToChange.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && !PreviousPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
-            {
-                ChangePos += 166.3731f;
-            }
-
-            PositionToChange.GetComponent<CreatureMoveController>().updateMoveTo(ChangePos);
-
-
+            //unless it's the first creature check to see if the dropdown is down.
+            if(i != 0)
+                if(Initiative.transform.GetChild(i - 1).GetChild(7).GetComponent<Animator>().GetBool("open"))
+                {
+                    offset -= 166.3731f;
+                }
+            Initiative.transform.GetChild(i).GetComponent<CreatureMoveController>().updatePosAndMoveTo(offset);
+            offset -= 31.61026f;
         }
     }
 
