@@ -55,6 +55,15 @@ public class DropDownHandler : MonoBehaviour
         this.gameObject.transform.GetComponent<Button>().enabled = false;
         this.gameObject.transform.parent.GetChild(2).GetComponent<Button>().enabled = false;
 
+        //prevent clicking of the side buttons to prevent errors
+        var Canvas = transform.parent.parent.parent.parent.parent.parent.gameObject;
+        Canvas.transform.GetChild(3).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(4).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(5).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(6).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(10).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(11).GetComponent<Button>().enabled = false;
+
         // Change size of scrollview
         RectTransform contentRT = this.transform.parent.parent.parent.gameObject.GetComponent<RectTransform>();
         contentRT.sizeDelta = new Vector2(0, contentRT.rect.height + _DropDownSize);
@@ -85,6 +94,13 @@ public class DropDownHandler : MonoBehaviour
         var currentTurn = initList.transform.parent.GetChild(0).gameObject;
         int currTurnIndex = currentTurn.GetComponent<ControlCombatScript>().TurnIndex;
         currentTurn.transform.position = new Vector2(51.10001f, initList.transform.GetChild(currTurnIndex).position.y);
+
+        Canvas.transform.GetChild(3).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(4).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(5).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(6).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(10).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(11).GetComponent<Button>().enabled = true;
     }
 
     IEnumerator WaitForCloseAnimation(float delay = 0, bool isJank = false)
@@ -92,6 +108,15 @@ public class DropDownHandler : MonoBehaviour
         // Prevent double clicking
         this.gameObject.transform.GetComponent<Button>().enabled = false;
         this.gameObject.transform.parent.GetChild(1).GetComponent<Button>().enabled = false;
+
+        //prevent clicking of the side buttons to prevent errors
+        var Canvas = transform.parent.parent.parent.parent.parent.parent.gameObject;
+        Canvas.transform.GetChild(3).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(4).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(5).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(6).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(10).GetComponent<Button>().enabled = false;
+        Canvas.transform.GetChild(11).GetComponent<Button>().enabled = false;
 
         GameObject initList = _dropDown.transform.parent.parent.gameObject;
         int currIndex = _dropDown.transform.parent.GetSiblingIndex();
@@ -119,5 +144,12 @@ public class DropDownHandler : MonoBehaviour
         var currentTurn = initList.transform.parent.GetChild(0).gameObject;
         int currTurnIndex = currentTurn.GetComponent<ControlCombatScript>().TurnIndex;
         currentTurn.transform.position = new Vector2(51.10001f, initList.transform.GetChild(currTurnIndex).position.y);
+
+        Canvas.transform.GetChild(3).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(4).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(5).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(6).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(10).GetComponent<Button>().enabled = true;
+        Canvas.transform.GetChild(11).GetComponent<Button>().enabled = true;
     }
 }

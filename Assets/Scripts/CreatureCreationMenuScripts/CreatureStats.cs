@@ -25,8 +25,8 @@ public class CreatureStats : MonoBehaviour
             _Strength[i] = abilityStuff[0, i];
             _Dexterity[i] = abilityStuff[1, i];
             _Constitution[i] = abilityStuff[2, i];
-            _Wisdom[i] = abilityStuff[3, i];
-            _Intelligence[i] = abilityStuff[4, i];
+            _Intelligence[i] = abilityStuff[3, i];
+            _Wisdom[i] = abilityStuff[4, i];
             _Charisma[i] = abilityStuff[5, i];
         }
         _Passives = passives;

@@ -41,12 +41,12 @@ public class SaveLoadCreature : MonoBehaviour
             var stats = toMove.GetComponent<CreatureStats>();
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
             stats.SaveValues();
+            Destroy(toMove);
         }
     }
 
     public void LoadCreature()
     {
-
         JsonHandler.Init();
         GameObject holder = new GameObject();
         holder.AddComponent<CreatureStats>();
@@ -57,6 +57,7 @@ public class SaveLoadCreature : MonoBehaviour
         {
             SetInput(InputFields[i], values);
         }
+        Destroy(holder);
     }
 
     private void InputValue(InputField CurrentField)

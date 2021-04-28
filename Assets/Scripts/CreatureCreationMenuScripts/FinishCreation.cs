@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class FinishCreation : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class FinishCreation : MonoBehaviour
     [SerializeField] private Color _oldHighlightColor;
     [SerializeField] private Color _newBkgdColor;
     [SerializeField] private Color _newHighlightColor;
+    [SerializeField] private GameObject _Success;
 
     private void Update()
     {
@@ -36,7 +38,10 @@ public class FinishCreation : MonoBehaviour
 		InputField[] InputFields = FindObjectsOfType<InputField>();
         bool IsntComplete = false;
 		if (SceneManager.GetSceneByName("CreatureDump").name == null)
-			creatureDump = SceneManager.CreateScene("CreatureDump");
+        {
+            SceneManager.LoadScene("CreatureDump", LoadSceneMode.Additive);
+            creatureDump = SceneManager.GetSceneByName("CreatureDump");
+        }
 		else
 			creatureDump = SceneManager.GetSceneByName("CreatureDump");
 		for(int i = 0; i < InputFields.Length; i++)
@@ -59,14 +64,6 @@ public class FinishCreation : MonoBehaviour
             var toMove = Instantiate(newCreature);
             var stats = toMove.GetComponent<CreatureStats>();
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
-
-            // comment out dummy conditional to keep the build from delaying
-            /*
-            if(true)
-            {
-                stats.SaveValues();
-            }
-            */
 
             var nameButton1 = toMove.transform.Find("NameAndShowStatsOpen").gameObject;
             var nameButton2 = toMove.transform.Find("NameAndShowStatsClose").gameObject;
@@ -100,6 +97,7 @@ public class FinishCreation : MonoBehaviour
                 dropDown.transform.GetChild(1).GetChild(3 + i).GetComponent<TextMeshProUGUI>().text = "" + _passives[i];
             }
             SceneManager.MoveGameObjectToScene(toMove, creatureDump);
+            StartCoroutine(DisplaySuccess());
         }
 	}
 
@@ -219,5 +217,18 @@ public class FinishCreation : MonoBehaviour
         cb.normalColor = _oldBkgdColor;
         cb.highlightedColor = _oldHighlightColor;
         CurrentField.colors = cb;
+    }
+
+    private IEnumerator DisplaySuccess()
+    {
+        gameObject.GetComponent<Button>().enabled = false;
+        transform.parent.GetChild(14).GetComponent<Button>().enabled = false;
+        transform.parent.GetChild(15).GetComponent<Button>().enabled = false;
+        _Success.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        gameObject.GetComponent<Button>().enabled = true;
+        transform.parent.GetChild(14).GetComponent<Button>().enabled = true;
+        transform.parent.GetChild(15).GetComponent<Button>().enabled = true;
+        _Success.SetActive(false);
     }
 }

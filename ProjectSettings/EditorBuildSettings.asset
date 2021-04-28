@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CreatureCreationMenu.unity
     guid: 0233dca8f686816498adebfdcee501fe
+  - enabled: 1
+    path: Assets/Scenes/CreatureDump.unity
+    guid: e7016482b3dd4e9458f592daf1b3b13c
   m_configObjects: {}

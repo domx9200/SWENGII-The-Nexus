@@ -27,10 +27,22 @@ public class AddCreatures : MonoBehaviour
                 _InitiativeList.transform.parent.GetChild(0).gameObject.SetActive(true);
             }
         }
-        else if(_CreatureDump.GetRootGameObjects().Length > 1 || _CreatureDump.GetRootGameObjects()[0].transform.childCount > 0)
+        else if(_CreatureDump.GetRootGameObjects().Length > 1)
         {
             _InitiativeList.transform.parent.GetChild(0).gameObject.SetActive(true);
             AddCreaturesMethod();
+        }
+        else if(_CreatureDump.GetRootGameObjects().Length == 1)
+        {
+            if(_CreatureDump.GetRootGameObjects()[0].transform.childCount != 0)
+            {
+                _InitiativeList.transform.parent.GetChild(0).gameObject.SetActive(true);
+                AddCreaturesMethod();
+            }
+            else
+            {
+                _InitiativeList.transform.parent.GetChild(0).gameObject.SetActive(false);
+            }
         }
         else
         {
@@ -45,11 +57,12 @@ public class AddCreatures : MonoBehaviour
 
         if (Creatures.Length != 0)
         {
-            GameObject[] newCreatures = new GameObject[Creatures[0].transform.childCount + Creatures.Length - 1];
-            Debug.Log("newcreatures length: " + newCreatures.Length);
-
+            GameObject[] newCreatures;
             if (Creatures[0].name == "InitiativeList")
             {
+                newCreatures = new GameObject[Creatures[0].transform.childCount + Creatures.Length - 1];
+                Debug.Log("newcreatures length: " + newCreatures.Length);
+
                 for (int i = 0; i < Creatures[0].transform.childCount; i++)
                 {
                     newCreatures[i] = Creatures[0].transform.GetChild(i).gameObject;
@@ -61,6 +74,14 @@ public class AddCreatures : MonoBehaviour
                     newCreatures[i] = Creatures[i - Creatures[0].transform.childCount + 1];
                 }
                 j = 1;
+            }
+            else
+            {
+                newCreatures = new GameObject[Creatures.Length];
+                for(int i = 0; i < newCreatures.Length; i++)
+                {
+                    newCreatures[i] = Creatures[i];
+                }
             }
 
             for (int i = 0; i < newCreatures.Length; i++)
@@ -75,7 +96,7 @@ public class AddCreatures : MonoBehaviour
                     Vector2 LastChildPos = _InitiativeList.transform.GetChild(_InitiativeList.transform.childCount - 1).transform.localPosition;
                     LastChildPos.y -= _CreatureHeight;
                     newCreatures[i].transform.SetParent(_InitiativeList.transform);
-                    newCreatures[i].transform.localPosition = LastChildPos;
+                    Debug.Log(newCreatures[i].transform.localPosition);
                     newCreatures[i].GetComponent<CreatureMoveController>().updatePosAndMoveTo(LastChildPos.y);
                 }
             }
