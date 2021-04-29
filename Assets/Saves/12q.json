@@ -1,0 +1,41 @@
+{
+    "_Name": "12q",
+    "_HP": 24,
+    "_AC": 23,
+    "_Initiative": 22,
+    "_Strength": [
+        21,
+        20,
+        19
+    ],
+    "_Dexterity": [
+        18,
+        17,
+        16
+    ],
+    "_Constitution": [
+        15,
+        14,
+        13
+    ],
+    "_Intelligence": [
+        12,
+        11,
+        10
+    ],
+    "_Wisdom": [
+        9,
+        8,
+        7
+    ],
+    "_Charisma": [
+        6,
+        5,
+        4
+    ],
+    "_Passives": [
+        3,
+        2,
+        1
+    ]
+}

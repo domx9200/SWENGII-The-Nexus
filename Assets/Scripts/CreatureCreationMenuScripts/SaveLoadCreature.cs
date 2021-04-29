@@ -1,11 +1,13 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
+using System;
 using TMPro;
-using System.Collections;
 
-public class FinishCreation : MonoBehaviour
+public class SaveLoadCreature : MonoBehaviour
 {
+    [SerializeField] FinishCreation _ManageInput = null;
     private string _creatureName;
     private int _creatureHealth, _armorClass, _initiative;
     //the array is going to be in the order of [0] = ability score, [1] = ability mod, [2] = ability save
@@ -13,47 +15,21 @@ public class FinishCreation : MonoBehaviour
     private int[] _strength = new int[3], _dexterity = new int[3], _constitution = new int[3],
                   _intelligence = new int[3], _wisdom = new int[3], _charisma = new int[3], _passives = new int[3];
     public GameObject newCreature = null;
-    Scene creatureDump;
-    [SerializeField] private Color _oldBkgdColor;
-    [SerializeField] private Color _oldHighlightColor;
-    [SerializeField] private Color _newBkgdColor;
-    [SerializeField] private Color _newHighlightColor;
-    [SerializeField] private GameObject _Success;
-
-    private void Update()
+    public void SaveCreature()
     {
+        JsonHandler.Init();
         InputField[] InputFields = FindObjectsOfType<InputField>();
+        bool IsntComplete = false;
         for (int i = 0; i < InputFields.Length; i++)
         {
-            if (InputFields[i].text != "")
+            if (InputFields[i].text == "")
             {
-                UpdateInputFieldColorsFull(InputFields[i]);
-            }
-        }
-    }
-
-    public void OnCreatureFinish()
-	{
-        JsonHandler.Init();
-		InputField[] InputFields = FindObjectsOfType<InputField>();
-        bool IsntComplete = false;
-		if (SceneManager.GetSceneByName("CreatureDump").name == null)
-        {
-            SceneManager.LoadScene("CreatureDump", LoadSceneMode.Additive);
-            creatureDump = SceneManager.GetSceneByName("CreatureDump");
-        }
-		else
-			creatureDump = SceneManager.GetSceneByName("CreatureDump");
-		for(int i = 0; i < InputFields.Length; i++)
-        {
-            if(InputFields[i].text == "")
-            {
-                //do error checking
-                UpdateInputFieldColorsError(InputFields[i]);
+                _ManageInput.GetComponent<FinishCreation>().UpdateInputFieldColorsError(InputFields[i]);
                 IsntComplete = true;
-            } 
+            }
             else
             {
+                
                 InputValue(InputFields[i]);
             }
         }
@@ -64,52 +40,34 @@ public class FinishCreation : MonoBehaviour
             var toMove = Instantiate(newCreature);
             var stats = toMove.GetComponent<CreatureStats>();
             stats.SetValues(_creatureName, _creatureHealth, _armorClass, _initiative, abilities, _passives);
-
-            var nameButton1 = toMove.transform.Find("NameAndShowStatsOpen").gameObject;
-            var nameButton2 = toMove.transform.Find("NameAndShowStatsClose").gameObject;
-
-            var HPText = toMove.transform.Find("Health").GetChild(1).gameObject.GetComponent<TMP_InputField>();
-            var HPPlaceholder = toMove.transform.Find("Health").GetChild(1).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
-
-            var ACText = toMove.transform.Find("AC").GetChild(1).gameObject.GetComponent<TMP_InputField>();
-            var ACPlaceholder = toMove.transform.Find("AC").GetChild(1).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
-
-            var dropDown = toMove.transform.Find("DropDown").gameObject;
-
-            nameButton1.GetComponentInChildren<TextMeshProUGUI>().text = _creatureName;
-            nameButton2.GetComponentInChildren<TextMeshProUGUI>().text = _creatureName;
-
-            HPText.text = "" + _creatureHealth;
-            HPPlaceholder.text = "" + _creatureHealth;
-
-            ACText.text = "" + _armorClass;
-            ACPlaceholder.text = "" + _armorClass;
-
-            for(int i = 0; i < 6; i++)
-            {
-                dropDown.transform.GetChild(0).GetChild(8 + i).GetComponent<TextMeshProUGUI>().text = "" + abilities[i, 0];
-                dropDown.transform.GetChild(0).GetChild(15 + i).GetComponent<TextMeshProUGUI>().text = "" + abilities[i, 1];
-                dropDown.transform.GetChild(0).GetChild(22 + i).GetComponent<TextMeshProUGUI>().text = "" + abilities[i, 2];
-            }
-
-            for(int i = 0; i < 3; i++)
-            {
-                dropDown.transform.GetChild(1).GetChild(3 + i).GetComponent<TextMeshProUGUI>().text = "" + _passives[i];
-            }
-            SceneManager.MoveGameObjectToScene(toMove, creatureDump);
-            StartCoroutine(DisplaySuccess());
+            stats.SaveValues();
+            Destroy(toMove);
         }
-	}
+    }
 
-    public void InputValue(InputField CurrentField)
+    public void LoadCreature()
+    {
+        JsonHandler.Init();
+        GameObject holder = new GameObject();
+        holder.AddComponent<CreatureStats>();
+        CreatureStats values = holder.GetComponent<CreatureStats>();
+        values.LoadValues();
+        InputField[] InputFields = FindObjectsOfType<InputField>();
+        for(int i = 0; i < InputFields.Length; i++)
+        {
+            SetInput(InputFields[i], values);
+        }
+        Destroy(holder);
+    }
+
+    private void InputValue(InputField CurrentField)
     {
         string input = CurrentField.text;
         int temp;
         //start with seeing if it's the name because it doesn't need to be converted to an int
         if (CurrentField.transform.parent.name == "creatureName")
         {
-            _creatureName = input;
-            Debug.Log(_creatureName);
+                _creatureName = input;
             //next three are prefab checks because they need special input
         }
         else if (CurrentField.transform.name == "AbilityScoreInputField")
@@ -177,7 +135,7 @@ public class FinishCreation : MonoBehaviour
         switch (name)
         {
             case "strength":
-                _strength[index] = valueToSet;
+                    _strength[index] = valueToSet;
                 Debug.Log(_strength[index]);
                 break;
             case "dexterity":
@@ -203,32 +161,72 @@ public class FinishCreation : MonoBehaviour
         }
     }
 
-    public void UpdateInputFieldColorsError(InputField CurrentField)
+    private void SetInput(InputField CurrentField, CreatureStats statsToSet)
     {
-        ColorBlock cb = CurrentField.colors;
-        cb.normalColor = _newBkgdColor;
-        cb.highlightedColor = _newHighlightColor;
-        CurrentField.colors = cb;
-    }
+        int pos = 0;
+        Action<InputField> CheckPrefab = name =>
+        {
+            switch (name.name)
+            {
+                case "AbilityScoreInputField":
+                    pos = 0;
+                    break;
+                case "AbilityBonusInputField":
+                    pos = 1;
+                    break;
+                case "AbilitySaveInputField":
+                    pos = 2;
+                    break;
+            }
+        };
 
-    private void UpdateInputFieldColorsFull(InputField CurrentField)
-    {
-        ColorBlock cb = CurrentField.colors;
-        cb.normalColor = _oldBkgdColor;
-        cb.highlightedColor = _oldHighlightColor;
-        CurrentField.colors = cb;
-    }
-
-    private IEnumerator DisplaySuccess()
-    {
-        gameObject.GetComponent<Button>().enabled = false;
-        transform.parent.GetChild(14).GetComponent<Button>().enabled = false;
-        transform.parent.GetChild(15).GetComponent<Button>().enabled = false;
-        _Success.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        gameObject.GetComponent<Button>().enabled = true;
-        transform.parent.GetChild(14).GetComponent<Button>().enabled = true;
-        transform.parent.GetChild(15).GetComponent<Button>().enabled = true;
-        _Success.SetActive(false);
+        switch (CurrentField.transform.parent.name)
+        {
+            case "creatureName":
+                CurrentField.text = statsToSet._Name;
+                break;
+            case "creatureHealth":
+                CurrentField.text = statsToSet._HP.ToString();
+                break;
+            case "armorClass":
+                CurrentField.text = statsToSet._AC.ToString();
+                break;
+            case "initiative":
+                CurrentField.text = statsToSet._Initiative.ToString();
+                break;
+            case "perception":
+                CurrentField.text = statsToSet._Passives[0].ToString();
+                break;
+            case "investigation":
+                CurrentField.text = statsToSet._Passives[1].ToString();
+                break;
+            case "insight":
+                CurrentField.text = statsToSet._Passives[2].ToString();
+                break;
+            case "strength":
+                CheckPrefab(CurrentField);
+                CurrentField.text = statsToSet._Strength[pos].ToString();
+                break;
+            case "dexterity":
+                CheckPrefab(CurrentField);
+                CurrentField.text = statsToSet._Dexterity[pos].ToString();
+                break;
+            case "constitution":
+                CheckPrefab(CurrentField);
+                CurrentField.text = statsToSet._Constitution[pos].ToString();
+                break;
+            case "intelligence":
+                CheckPrefab(CurrentField);
+                CurrentField.text = statsToSet._Intelligence[pos].ToString();
+                break;
+            case "wisdom":
+                CheckPrefab(CurrentField);
+                CurrentField.text = statsToSet._Wisdom[pos].ToString();
+                break;
+            case "charisma":
+                CheckPrefab(CurrentField);
+                CurrentField.text = statsToSet._Charisma[pos].ToString();
+                break;
+        }
     }
 }

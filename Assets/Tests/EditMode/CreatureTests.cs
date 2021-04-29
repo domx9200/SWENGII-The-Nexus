@@ -31,8 +31,8 @@ namespace Tests
                 passed += testVariable<int>(abilities[0, i], creatureTest._Strength[i]);
                 passed += testVariable<int>(abilities[1, i], creatureTest._Dexterity[i]);
                 passed += testVariable<int>(abilities[2, i], creatureTest._Constitution[i]);
-                passed += testVariable<int>(abilities[3, i], creatureTest._Wisdom[i]);
-                passed += testVariable<int>(abilities[4, i], creatureTest._Intelligence[i]);
+                passed += testVariable<int>(abilities[3, i], creatureTest._Intelligence[i]);
+                passed += testVariable<int>(abilities[4, i], creatureTest._Wisdom[i]);
                 passed += testVariable<int>(abilities[5, i], creatureTest._Charisma[i]);
             }
             Assert.AreEqual(25, passed);

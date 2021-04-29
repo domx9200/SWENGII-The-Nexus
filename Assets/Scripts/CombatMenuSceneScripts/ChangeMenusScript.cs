@@ -31,6 +31,8 @@ public class ChangeMenusScript : MonoBehaviour
         _initiativeList.AddComponent<ControlCombatScript>();
         ControlCombatScript temp = _initiativeList.GetComponent<ControlCombatScript>();
         ControlCombatScript CurrentTurn = _initiativeList.transform.parent.GetChild(0).GetComponent<ControlCombatScript>();
+        Debug.Log(temp);
+        Debug.Log(CurrentTurn);
         temp.TurnIndex = CurrentTurn.TurnIndex;
         temp.RoundCount = CurrentTurn.RoundCount;
 

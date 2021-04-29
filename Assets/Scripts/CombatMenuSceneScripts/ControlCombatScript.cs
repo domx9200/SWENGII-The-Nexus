@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ControlCombatScript : MonoBehaviour
 {
@@ -24,17 +25,37 @@ public class ControlCombatScript : MonoBehaviour
     {
         int n = Initiative.transform.childCount;
         for (int i = 0; i < n - 1; i++)
+        {
             for (int j = 0; j < n - i - 1; j++)
-                if (Initiative.transform.GetChild(j).GetComponent<CreatureStats>()._Initiative < Initiative.transform.GetChild(j + 1).GetComponent<CreatureStats>()._Initiative)
+            {
+                int jInit = 0;
+                int J1Init = 0;
+                int.TryParse(Initiative.transform.GetChild(j).GetChild(0).GetChild(0).GetComponent<TMP_InputField>().text, out jInit);
+                int.TryParse(Initiative.transform.GetChild(j + 1).GetChild(0).GetChild(0).GetComponent<TMP_InputField>().text, out J1Init);
+                if (jInit < J1Init)
                 {
                     // Swap their positions
                     GameObject TopPosition = Initiative.transform.GetChild(j).gameObject;
                     GameObject BottomPosition = Initiative.transform.GetChild(j + 1).gameObject;
 
-                    // Currently just swaps in the hierarchy. Need to figure out how to change on screen.
                     TopPosition.transform.SetSiblingIndex(j + 1);
                     BottomPosition.transform.SetSiblingIndex(j);
                 }
+            }
+        }
+
+        float offset = 0f;
+        for(int i = 0; i < n; i++)
+        {
+            //unless it's the first creature check to see if the dropdown is down.
+            if(i != 0)
+                if(Initiative.transform.GetChild(i - 1).GetChild(7).GetComponent<Animator>().GetBool("open"))
+                {
+                    offset -= 166.3731f;
+                }
+            Initiative.transform.GetChild(i).GetComponent<CreatureMoveController>().updatePosAndMoveTo(offset);
+            offset -= 31.61026f;
+        }
     }
 
     // Method to advance to the next turn, and advance the round counter as necessary.
