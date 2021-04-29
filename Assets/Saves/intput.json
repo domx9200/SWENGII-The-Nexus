@@ -1,15 +1,8 @@
 {
-<<<<<<< Updated upstream
     "_Name": "intput",
     "_HP": 120,
     "_AC": 21,
     "_Initiative": 7,
-=======
-    "_Name": "Y",
-    "_HP": 0,
-    "_AC": 0,
-    "_Initiative": 0,
->>>>>>> Stashed changes
     "_Strength": [
         10,
         0,

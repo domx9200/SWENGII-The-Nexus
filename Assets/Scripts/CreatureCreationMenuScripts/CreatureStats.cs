@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SFB;
 
 public class CreatureStats : MonoBehaviour
 {
@@ -29,5 +30,44 @@ public class CreatureStats : MonoBehaviour
             _Charisma[i] = abilityStuff[5, i];
         }
         _Passives = passives;
+    }
+
+    // Overload of SetValues compatible with StatsData
+    public void SetValues(StatsData data) 
+    {
+        _Name = data._Name;
+        _HP = data._HP;
+        _AC = data._AC;
+        _Initiative = data._Initiative;
+
+        _Strength = data._Strength;
+        _Dexterity = data._Dexterity;
+        _Constitution = data._Constitution;
+        _Intelligence = data._Intelligence;
+        _Wisdom = data._Wisdom;
+        _Charisma = data._Charisma;
+        _Passives = data._Passives;
+    }
+
+    public StatsData GetValues() 
+    {
+        StatsData data = new StatsData(this);
+        return data;
+    }
+
+    public void SaveValues()
+    {
+        string path = StandaloneFileBrowser.SaveFilePanel("Save creature as JSON", 
+            JsonHandler.SAVE_FOLDER, _Name + ".json", "json"); // Ensure the JSON file extension")
+        JsonHandler.Save(this, path);
+    }
+
+    // Need to get file name at runtime
+    public void LoadValues()
+    {
+        string path = StandaloneFileBrowser.OpenFilePanel("Load creature from JSON", JsonHandler.SAVE_FOLDER, "json", false)[0];
+        StatsData data = JsonHandler.Load(path);
+        // overwrite
+        this.SetValues(data);
     }
 }

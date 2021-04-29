@@ -1,0 +1,41 @@
+{
+    "_Name": "test",
+    "_HP": 120,
+    "_AC": 21,
+    "_Initiative": 7,
+    "_Strength": [
+        10,
+        0,
+        1
+    ],
+    "_Dexterity": [
+        12,
+        1,
+        2
+    ],
+    "_Constitution": [
+        14,
+        2,
+        3
+    ],
+    "_Intelligence": [
+        18,
+        4,
+        5
+    ],
+    "_Wisdom": [
+        16,
+        3,
+        4
+    ],
+    "_Charisma": [
+        20,
+        5,
+        6
+    ],
+    "_Passives": [
+        15,
+        17,
+        19
+    ]
+}

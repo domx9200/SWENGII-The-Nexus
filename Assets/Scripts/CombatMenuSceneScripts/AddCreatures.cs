@@ -6,52 +6,85 @@ using UnityEngine.UI;
 
 public class AddCreatures : MonoBehaviour
 {
-    private Scene _creatureDump;
-    [SerializeField] private GameObject _initiativeList;
-    private float _creatureHeight = 31.61026f;
+    private Scene _CreatureDump;
+    [SerializeField] private GameObject _InitiativeList;
+    [SerializeField] private GameObject _content;
+    private float _CreatureHeight = 31.61026f;
 
     private void Awake()
     {
-        _creatureDump = SceneManager.GetSceneByName("CreatureDump");
+        _CreatureDump = SceneManager.GetSceneByName("CreatureDump");
         
-        if (_creatureDump.name == null)
+        if (_CreatureDump.name == null)
         {
             Debug.Log("AddCreature:: creatureDump is null");
+            if(_InitiativeList.transform.childCount == 0)
+            {
+                _InitiativeList.transform.parent.GetChild(0).gameObject.SetActive(false);
+            }
+            else
+            {
+                _InitiativeList.transform.parent.GetChild(0).gameObject.SetActive(true);
+            }
         }
         else
         {
+            _InitiativeList.transform.parent.GetChild(0).gameObject.SetActive(true);
             AddCreaturesMethod();
         }
     }
 
     private void AddCreaturesMethod()
     {
-        GameObject[] creatures = _creatureDump.GetRootGameObjects();
+        GameObject[] Creatures = _CreatureDump.GetRootGameObjects();
+        int j = 0;
 
-        for (int i = 0; i < creatures.Length; i++)
+        GameObject[] newCreatures = new GameObject[Creatures[0].transform.childCount + Creatures.Length - 1];
+        Debug.Log("newcreatures length: " + newCreatures.Length);
+
+        if (Creatures[0].name == "InitiativeList")
         {
-            if (_initiativeList.transform.childCount == 0)
+            for (int i = 0; i < Creatures[0].transform.childCount; i++)
             {
-                Debug.Log("First creature in list: " + creatures[i]);
-                creatures[i].transform.SetParent(_initiativeList.transform);
-                creatures[i].transform.localPosition = Vector2.zero;
+                newCreatures[i] = Creatures[0].transform.GetChild(i).gameObject;
+                Debug.Log(newCreatures[i].GetComponent<CreatureStats>()._Name);
             }
+
+            for (int i = Creatures[0].transform.childCount; i < newCreatures.Length; i++)
+            {
+                newCreatures[i] = Creatures[i - Creatures[0].transform.childCount + 1];
+            }
+            j = 1;
+        }
+
+        for (int i = 0; i <  newCreatures.Length; i++)
+        {
+            if(_InitiativeList.transform.childCount == 0) 
+            {
+                newCreatures[i].transform.SetParent(_InitiativeList.transform);
+                newCreatures[i].GetComponent<CreatureMoveController>().updatePosAndMoveTo(0f);
+            } 
             else
             {
-                Debug.Log("Previous creatures: " + _initiativeList.transform.GetChild(_initiativeList.transform.childCount-1));
-                Vector2 lastChildPos = _initiativeList.transform.GetChild(_initiativeList.transform.childCount - 1).position;
-                Debug.Log("Position " +lastChildPos);
-                Debug.Log("old y: " + lastChildPos.y);
-                lastChildPos.y -= _creatureHeight;
-                Debug.Log("new y: " + lastChildPos.y);
-                creatures[i].transform.SetParent(_initiativeList.transform);
-                creatures[i].transform.position = lastChildPos;
-
-                // Change size of content to fit new creature
-                float childHeight = _initiativeList.transform.GetChild(_initiativeList.transform.childCount - 1).GetComponent<RectTransform>().rect.height;
-                RectTransform contentRectTransform = _initiativeList.transform.parent.gameObject.GetComponent<RectTransform>();
-                contentRectTransform.sizeDelta = new Vector2(contentRectTransform.rect.width, contentRectTransform.rect.height + childHeight);
+                Vector2 LastChildPos = _InitiativeList.transform.GetChild(_InitiativeList.transform.childCount - 1).transform.localPosition;
+                LastChildPos.y -= _CreatureHeight;
+                newCreatures[i].transform.SetParent(_InitiativeList.transform);
+                newCreatures[i].transform.localPosition = LastChildPos;
+                newCreatures[i].GetComponent<CreatureMoveController>().updatePosAndMoveTo(LastChildPos.y);
             }
+        }
+
+        if (j == 1)
+        {
+            var temp = Creatures[0].GetComponent<ControlCombatScript>();
+            ControlCombatScript CurrentTurn = GameObject.Find("CurrentTurn").GetComponent<ControlCombatScript>();
+            CurrentTurn.TurnIndex = temp.TurnIndex - 1;
+            CurrentTurn.RoundCount = temp.RoundCount;
+            if (CurrentTurn.TurnIndex < 0)
+                CurrentTurn.TurnIndex = 0;
+            else
+                CurrentTurn.NextTurn();
+            Destroy(Creatures[0]);
         }
     }
 }
