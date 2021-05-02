@@ -9,6 +9,7 @@ public class AddCreatures : MonoBehaviour
     private Scene _CreatureDump;
     [SerializeField] private GameObject _InitiativeList;
     [SerializeField] private GameObject _content;
+    [SerializeField] private GameObject _CurrentTurn;
     private float _CreatureHeight = 31.61026f;
 
     private void Awake()
@@ -42,6 +43,8 @@ public class AddCreatures : MonoBehaviour
             else
             {
                 _InitiativeList.transform.parent.GetChild(0).gameObject.SetActive(false);
+                Destroy(_CreatureDump.GetRootGameObjects()[0]);
+                
             }
         }
         else
@@ -104,13 +107,15 @@ public class AddCreatures : MonoBehaviour
             if (j == 1)
             {
                 var temp = Creatures[0].GetComponent<ControlCombatScript>();
-                ControlCombatScript CurrentTurn = GameObject.Find("CurrentTurn").GetComponent<ControlCombatScript>();
-                CurrentTurn.TurnIndex = temp.TurnIndex - 1;
-                CurrentTurn.RoundCount = temp.RoundCount;
-                if (CurrentTurn.TurnIndex < 0)
-                    CurrentTurn.TurnIndex = 0;
+                Debug.Log(temp);
+                ControlCombatScript CurrentTurnScript = _CurrentTurn.GetComponent<ControlCombatScript>();
+                Debug.Log(CurrentTurnScript);
+                CurrentTurnScript.TurnIndex = temp.TurnIndex - 1;
+                CurrentTurnScript.RoundCount = temp.RoundCount;
+                if (CurrentTurnScript.TurnIndex < 0)
+                    CurrentTurnScript.TurnIndex = 0;
                 else
-                    CurrentTurn.NextTurn();
+                    CurrentTurnScript.NextTurn();
                 Destroy(Creatures[0]);
             }
 

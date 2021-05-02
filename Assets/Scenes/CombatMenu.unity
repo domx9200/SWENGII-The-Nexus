@@ -3612,6 +3612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _InitiativeList: {fileID: 217631552}
   _content: {fileID: 1361191192}
+  _CurrentTurn: {fileID: 1424991984}
 --- !u!4 &1828896434
 Transform:
   m_ObjectHideFlags: 0
@@ -3771,6 +3772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentScene: CombatMenu
   NewScene: MainMenu
+  init: {fileID: 217631552}
 --- !u!1 &1904151109
 GameObject:
   m_ObjectHideFlags: 0

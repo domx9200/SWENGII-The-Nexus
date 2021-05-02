@@ -5,7 +5,7 @@ using UnityEngine;
 public class CreatureMoveController : MonoBehaviour
 {
     Vector2 moveTo = new Vector2(0,0);
-    public float speed = 2.7f;
+    public float speed = 4f;
 
     public void updatePosAndMoveTo(float newLoc)
     {

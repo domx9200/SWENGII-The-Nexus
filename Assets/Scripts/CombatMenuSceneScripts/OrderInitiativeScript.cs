@@ -42,11 +42,10 @@ public class OrderInitiativeScript : MonoBehaviour
             if (gameObject.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && !BottomPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
             {
                 BotPos = transform.localPosition.y - 31.61026f;
-                gameObject.GetComponent<CreatureMoveController>().speed = 0.5f;
-            } else if(!gameObject.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && BottomPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
+            } 
+            else if(!gameObject.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && BottomPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
             {
                 BotPos = transform.localPosition.y - 31.61026f - 166.3731f;
-                BottomPosition.GetComponent<CreatureMoveController>().speed = 0.5f;
             }
 
             gameObject.GetComponent<CreatureMoveController>().updateMoveTo(BotPos);
@@ -62,8 +61,7 @@ public class OrderInitiativeScript : MonoBehaviour
     private IEnumerator WaitForSwap(float timeToWait, CreatureMoveController toChange)
     {
         yield return new WaitForSeconds(timeToWait);
-        toChange.speed = 2.7f;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.5f);
         GameObject currentTurn = Initiative.transform.parent.GetChild(0).gameObject;
         currentTurn.transform.position = new Vector2(51.10001f, Initiative.transform.GetChild(currentTurn.GetComponent<ControlCombatScript>().TurnIndex).position.y);
     }
@@ -88,13 +86,10 @@ public class OrderInitiativeScript : MonoBehaviour
             if (!gameObject.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && TopPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
             {
                 BotPos = TopPosition.transform.localPosition.y - 31.61026f;
-                TopPosition.gameObject.GetComponent<CreatureMoveController>().speed = 0.5f;
             }
             else if (gameObject.transform.GetChild(7).GetComponent<Animator>().GetBool("open") && !TopPosition.transform.GetChild(7).GetComponent<Animator>().GetBool("open"))
             {
                 BotPos = TopPosition.transform.localPosition.y - 31.61026f - 166.3731f;
-                Debug.Log(BotPos);
-                gameObject.GetComponent<CreatureMoveController>().speed = 0.5f;
             }
 
             gameObject.GetComponent<CreatureMoveController>().updateMoveTo(TopPos);
